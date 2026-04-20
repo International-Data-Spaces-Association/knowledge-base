@@ -9,10 +9,12 @@ Requirements:
   _sources/rulebook/ (folder to copy: documentation/)
   _sources/ram5/     (folder to copy: docs/)
   _sources/glossary/ (folder to copy: docs/)
+  _sources/manifesto/ (folder to copy: /)
 - Generates:
   docs/external/rulebook/
   docs/external/ram5/
   docs/external/glossary/
+  docs/external/manifesto/
   docs/SUMMARY.md  (via build_summary.py)
 """
 import os
@@ -38,6 +40,11 @@ SOURCES = {
         "src_root": REPO_ROOT / "_sources" / "glossary" / "docs",
         "summary_rel": "SUMMARY.md",
         "dst": EXTERNAL_DIR / "glossary",
+    },
+    "manifesto": {
+        "src_root": REPO_ROOT / "_sources" / "",
+        "summary_rel": "SUMMARY.md",
+        "dst": EXTERNAL_DIR / "manifesto",
     },
 }
 

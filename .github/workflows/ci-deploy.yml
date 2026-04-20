@@ -100,6 +100,15 @@ jobs:
           path: _sources/glossary
           token: ${{ secrets.SOURCE_REPOS_PAT }}
 
+      - name: Checkout Manifesto
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
+        uses: actions/checkout@v4
+        with:
+          repository: International-Data-Spaces-Association/Manifesto-of-International-Data-Spaces
+          ref: main
+          path: _sources/manifesto
+          token: ${{ secrets.SOURCE_REPOS_PAT }}
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:

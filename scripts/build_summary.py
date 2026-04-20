@@ -136,6 +136,9 @@ def build_merged_summary(triplets: Dict[str, Tuple[Path, Path]]) -> str:
     # Top-level: dataspace
     lines.append("* [What is a data space?](dataspace.md)")
 
+    # Top-level: manifesto
+    lines.append("* [Manifesto of International Data Spaces](external/manifesto/README.md)")
+
     # Knowledge with 3 subsections
     lines.append("* Knowledge")
     for key in ORDER:
