@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{# Add a right-aligned logo while keeping the stock header intact #}
+{% block header %}
+  {{ super() }}
+   <a class="kb-header-logo" href="{{ base_url ~ '/' if base_url else '/' }}" title="{{ config.site_name|e }}">
+    <img src="{{ base_url }}/assets/IDSA-logo_2.png" alt="Logo" height="28" />
+  </a>
+{% endblock %}

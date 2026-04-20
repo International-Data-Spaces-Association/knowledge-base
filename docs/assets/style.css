@@ -1,0 +1,32 @@
+/* Header logo placement (right side) 
+.kb-header-logo {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.35rem;
+}
+.kb-header-logo .kb-logo {
+  height: 28px;
+  opacity: 0.9;
+}
+*/
+
+/* Footer layout */
+.kb-footer-links, .kb-footer-copy {
+  margin: 0.25rem 0;
+}
+.kb-footer-links a {
+  text-decoration: none;
+}
+
+
+.md-footer,
+.md-footer .md-footer-meta {
+  font-size: 0.85rem;   /* try 0.80–0.90 based on taste */
+  line-height: 1.35;
+}
+
+:root  > * {
+  --md-primary-fg-color:        #0099FF;
+  --md-primary-fg-color--light: #0099FF;
+  --md-primary-fg-color--dark:  #0099FF;
+}
