@@ -2,6 +2,14 @@
 
 The IDSA Knowledge Base serves as a comprehensive repository of information and resources developed by the IDSA Working Groups. This platform brings together a collection of approved and published deliverables, offering valuable insights and guidance for the general public. While the Working Groups are continually refining and updating their materials, the Knowledge Base features only the finalized versions that have undergone review and approval. As a result, the documents included may not always reflect the most current status of ongoing drafts, but they represent the authoritative and officially released content.
 
+## Version 2026-1
+
+This release 2026-1 includes:
+
+* IDSA Rulebook 2026-1 release
+* IDS-RAM 2026-1 Release Candidate
+* Glossary 2026-1 Release Candidate
+
 ## What you will find in the IDSA Knowledge Base
 
 * **Manifesto of International Data Spaces:** *(tbd)* Discover the foundational vision and guiding idea behind international data spaces, outlining their purpose, core values, and the future they aim to enable.
