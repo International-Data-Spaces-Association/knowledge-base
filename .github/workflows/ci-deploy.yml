@@ -138,9 +138,9 @@ jobs:
           set -euxo pipefail
           echo "PWD: $(pwd)"
           echo "Workspace: $GITHUB_WORKSPACE"
-          echo "Export dir: ${EXPORT_DIR:-./external}"
+          echo "Export dir: ${EXPORT_DIR:-./docs}"
 
-          dir="${EXPORT_DIR:-./external}"
+          dir="${EXPORT_DIR:-./docs}"
 
           if [ -d "$dir" ]; then
             echo "== ls -la =="
@@ -274,9 +274,9 @@ jobs:
           set -euxo pipefail
           echo "PWD: $(pwd)"
           echo "Workspace: $GITHUB_WORKSPACE"
-          echo "Export dir: ${EXPORT_DIR:-./exernal}"
+          echo "Export dir: ${EXPORT_DIR:-./docs}"
 
-          dir="${EXPORT_DIR:-./external}"
+          dir="${EXPORT_DIR:-./docs}"
 
           if [ -d "$dir" ]; then
             echo "== ls -la =="
