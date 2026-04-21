@@ -6,6 +6,7 @@ The IDSA Knowledge Base serves as a comprehensive repository of information and 
 
 This release 2026-1 includes:
 
+* Manifesto of International data spaces
 * IDSA Rulebook 2026-1 release (see release notes (tbd))
 * IDS-RAM 2026-1 Release Candidate
 * Glossary 2026-1 Release Candidate
