@@ -123,12 +123,6 @@ jobs:
         run: |
           python scripts/verify_env.py
 
-      - name: Copy Manifesto README into docs/external
-        shell: bash
-        run: |
-            mkdir -p docs/external/manifesto
-            cp _sources/manifesto/README.md docs/external/manifesto/manifesto.md
-
       - name: Assemble external content & build merged SUMMARY
         run: |
           python scripts/sync_external_content.py
@@ -137,6 +131,11 @@ jobs:
         run: |
           sed -n '1,200p' docs/SUMMARY.md
 
+      - name: Copy Manifesto README into docs/external
+        shell: bash
+        run: |
+            mkdir -p docs/external/manifesto
+            cp _sources/manifesto/README.md docs/external/manifesto/manifesto.md
           
       - name: Debug — list export directory
         if: always()
