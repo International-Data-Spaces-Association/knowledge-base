@@ -130,6 +130,33 @@ jobs:
       - name: Debug show generated SUMMARY.md (first 200 lines)
         run: |
           sed -n '1,200p' docs/SUMMARY.md
+          
+      - name: Debug — list export directory
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          echo "PWD: $(pwd)"
+          echo "Workspace: $GITHUB_WORKSPACE"
+          echo "Export dir: ${EXPORT_DIR:-./export}"
+
+          dir="${EXPORT_DIR:-./export}"
+
+          if [ -d "$dir" ]; then
+            echo "== ls -la =="
+            ls -la "$dir"
+            echo
+            echo "== tree (if available) =="
+            command -v tree >/dev/null 2>&1 && tree -a "$dir" || echo "tree not installed"
+            echo
+            echo "== du -h =="
+            du -h -d 2 "$dir" 2>/dev/null || du -h "$dir"
+            echo
+            echo "== file types (top 200) =="
+            find "$dir" -maxdepth 3 -type f -print0 | xargs -0 -n1 file | head -n 200 || true
+          else
+            echo "Directory does not exist: $dir"
+          fi
 
       # ---------------------------
       # Export DOCX + PDF (main only)
@@ -239,6 +266,33 @@ jobs:
             exports/knowledge-base-${{ steps.exportver.outputs.version }}.pdf
             exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx
             exports/knowledge-base.md
+          
+      - name: Debug — list export directory
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          echo "PWD: $(pwd)"
+          echo "Workspace: $GITHUB_WORKSPACE"
+          echo "Export dir: ${EXPORT_DIR:-./export}"
+
+          dir="${EXPORT_DIR:-./export}"
+
+          if [ -d "$dir" ]; then
+            echo "== ls -la =="
+            ls -la "$dir"
+            echo
+            echo "== tree (if available) =="
+            command -v tree >/dev/null 2>&1 && tree -a "$dir" || echo "tree not installed"
+            echo
+            echo "== du -h =="
+            du -h -d 2 "$dir" 2>/dev/null || du -h "$dir"
+            echo
+            echo "== file types (top 200) =="
+            find "$dir" -maxdepth 3 -type f -print0 | xargs -0 -n1 file | head -n 200 || true
+          else
+            echo "Directory does not exist: $dir"
+          fi
 
       # Build the HTML site (includes published downloads)
       - name: Build MkDocs (strict)
