@@ -138,9 +138,9 @@ jobs:
           set -euxo pipefail
           echo "PWD: $(pwd)"
           echo "Workspace: $GITHUB_WORKSPACE"
-          echo "Export dir: ${EXPORT_DIR:-./export}"
+          echo "Export dir: ${EXPORT_DIR:-./external}"
 
-          dir="${EXPORT_DIR:-./export}"
+          dir="${EXPORT_DIR:-./external}"
 
           if [ -d "$dir" ]; then
             echo "== ls -la =="
@@ -153,7 +153,7 @@ jobs:
             du -h -d 2 "$dir" 2>/dev/null || du -h "$dir"
             echo
             echo "== file types (top 200) =="
-            find "$dir" -maxdepth 3 -type f -print0 | xargs -0 -n1 file | head -n 200 || true
+            find "$dir" -maxdepth 5 -type f -print0 | xargs -0 -n1 file | head -n 200 || true
           else
             echo "Directory does not exist: $dir"
           fi
@@ -274,9 +274,9 @@ jobs:
           set -euxo pipefail
           echo "PWD: $(pwd)"
           echo "Workspace: $GITHUB_WORKSPACE"
-          echo "Export dir: ${EXPORT_DIR:-./export}"
+          echo "Export dir: ${EXPORT_DIR:-./exernal}"
 
-          dir="${EXPORT_DIR:-./export}"
+          dir="${EXPORT_DIR:-./external}"
 
           if [ -d "$dir" ]; then
             echo "== ls -la =="
@@ -289,7 +289,7 @@ jobs:
             du -h -d 2 "$dir" 2>/dev/null || du -h "$dir"
             echo
             echo "== file types (top 200) =="
-            find "$dir" -maxdepth 3 -type f -print0 | xargs -0 -n1 file | head -n 200 || true
+            find "$dir" -maxdepth 5 -type f -print0 | xargs -0 -n1 file | head -n 200 || true
           else
             echo "Directory does not exist: $dir"
           fi
