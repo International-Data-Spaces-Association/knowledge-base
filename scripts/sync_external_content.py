@@ -42,7 +42,7 @@ SOURCES = {
         "dst": EXTERNAL_DIR / "glossary",
     },
     "manifesto": {
-        "src_root": REPO_ROOT / "_sources" / "",
+        "src_root": REPO_ROOT / "_sources" / "/",
         "summary_rel": "SUMMARY.md",
         "dst": EXTERNAL_DIR / "manifesto",
     },
