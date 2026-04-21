@@ -41,11 +41,6 @@ SOURCES = {
         "summary_rel": "SUMMARY.md",
         "dst": EXTERNAL_DIR / "glossary",
     },
-    "manifesto": {
-        "src_root": REPO_ROOT / "_sources" / "/",
-        "summary_rel": "SUMMARY.md",
-        "dst": EXTERNAL_DIR / "manifesto",
-    },
 }
 
 def rm_tree(path: Path):
