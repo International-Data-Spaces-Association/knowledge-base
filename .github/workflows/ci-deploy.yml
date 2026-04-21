@@ -1,0 +1,326 @@
+name: CI & Deploy (MkDocs Material / GitHub Pages)
+
+on:
+  push:
+    branches: [ "main", "*" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@v15
+        with:
+          globs: |
+            **/*.md
+            !_sources/**
+
+  linkcheck:
+    name: Broken Link Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Cache lychee
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: lychee-${{ runner.os }}-${{ hashFiles('.lychee.toml') }}
+
+      - name: Run lychee
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >-
+            --config .lychee.toml
+            --no-progress
+            --accept 200,206,301,302,429
+            docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    name: Build Docs (with external sources) + Exports
+    runs-on: ubuntu-latest
+    needs: [lint, linkcheck]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # --- External sources checkout (read-only; skipped on forked PRs) ---
+      - name: Checkout Rulebook
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
+        uses: actions/checkout@v4
+        with:
+          repository: International-Data-Spaces-Association/IDSA-Rulebook
+          ref: main
+          path: _sources/rulebook
+          token: ${{ secrets.SOURCE_REPOS_PAT }}
+
+      - name: Checkout RAM5
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
+        uses: actions/checkout@v4
+        with:
+          repository: International-Data-Spaces-Association/RAM5
+          ref: main
+          path: _sources/ram5
+          token: ${{ secrets.SOURCE_REPOS_PAT }}
+
+      - name: Checkout Glossary
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
+        uses: actions/checkout@v4
+        with:
+          repository: International-Data-Spaces-Association/Glossary
+          ref: main
+          path: _sources/glossary
+          token: ${{ secrets.SOURCE_REPOS_PAT }}
+
+      - name: Checkout Manifesto
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
+        uses: actions/checkout@v4
+        with:
+          repository: International-Data-Spaces-Association/Manifesto-of-International-Data-Spaces
+          ref: main
+          path: _sources/manifesto
+          token: ${{ secrets.SOURCE_REPOS_PAT }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies (fresh)
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade --no-cache-dir -r requirements.txt
+
+      - name: Verify mkdocs + literate-nav in this env
+        run: |
+          python scripts/verify_env.py
+
+      - name: Assemble external content & build merged SUMMARY
+        run: |
+          python scripts/sync_external_content.py
+
+      - name: Debug show generated SUMMARY.md (first 200 lines)
+        run: |
+          sed -n '1,200p' docs/SUMMARY.md
+
+      - name: Copy Manifesto README into docs/external
+        shell: bash
+        run: |
+            mkdir -p docs/external/manifesto
+            cp _sources/manifesto/README.md docs/external/manifesto/manifesto.md
+          
+      - name: Debug — list export directory
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          echo "PWD: $(pwd)"
+          echo "Workspace: $GITHUB_WORKSPACE"
+          echo "Export dir: ${EXPORT_DIR:-./docs}"
+
+          dir="${EXPORT_DIR:-./docs}"
+
+          if [ -d "$dir" ]; then
+            echo "== ls -la =="
+            ls -la "$dir"
+            echo
+            echo "== tree (if available) =="
+            command -v tree >/dev/null 2>&1 && tree -a "$dir" || echo "tree not installed"
+            echo
+            echo "== du -h =="
+            du -h -d 2 "$dir" 2>/dev/null || du -h "$dir"
+            echo
+            echo "== file types (top 200) =="
+            find "$dir" -maxdepth 5 -type f -print0 | xargs -0 -n1 file | head -n 200 || true
+          else
+            echo "Directory does not exist: $dir"
+          fi
+
+      # ---------------------------
+      # Export DOCX + PDF (main only)
+      # ---------------------------
+      - name: Compute export version
+        if: ${{ github.ref == 'refs/heads/main' }}
+        id: exportver
+        run: |
+          SHORT_SHA="${GITHUB_SHA::7}"
+          DATE="$(date -u +'%Y%m%d')"
+          echo "version=${DATE}-${{ github.run_number }}-${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Build export book markdown (ALL content)
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          mkdir -p exports
+          python scripts/export_book.py \
+            --docs-dir docs \
+            --summary docs/SUMMARY.md \
+            --out exports/knowledge-base.md \
+            --title "Knowledge Base" \
+            --version "${{ steps.exportver.outputs.version }}"
+      
+      - name: Stage export media and rewrite image links
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          python scripts/export_stage_media.py \
+            --docs-dir docs \
+            --book exports/knowledge-base.md \
+            --out-book exports/knowledge-base.with-media.md \
+            --media-dir exports/media
+
+      - name: Generate PDF cover page
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          cat > exports/cover.md <<'EOF'
+          ---
+          title: "Knowledge Base"
+          subtitle: "Export"
+          author: "International Data Spaces Association"
+          date: ""
+          ---
+          
+          # Knowledge Base
+          
+          **Version:** ${{ steps.exportver.outputs.version }}
+          
+          **Generated:** $(date -u +'%Y-%m-%d')
+          
+          \newpage
+          EOF
+
+      - name: Export DOCX (Pandoc)
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: docker://pandoc/core:3.9
+        with:
+          args: >-
+            exports/knowledge-base.with-media.md
+            --from=markdown
+            --standalone
+            --toc
+            --number-sections
+            --reference-doc=assets/templates/reference.docx
+            --resource-path=exports:exports/media:docs:docs/external:docs/assets
+            --output=exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx
+
+      - name: Export PDF (Pandoc + LaTeX)
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: docker://pandoc/latex:3.9
+        with:
+          args: >-
+            exports/cover.md
+            exports/knowledge-base.with-media.md
+            --from=markdown
+            --standalone
+            --toc
+            --number-sections
+            --pdf-engine=xelatex
+            -V papersize=a4
+            -V geometry:margin=2.5cm
+            -V fontsize=11pt
+            --resource-path=exports:exports/media:docs:docs/external:docs/assets
+            --output=exports/knowledge-base-${{ steps.exportver.outputs.version }}.pdf
+
+      - name: Debug count staged images and sample listing
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          ls -la exports/media | head -n 50
+          echo "Staged images:" $(ls -1 exports/media | wc -l)
+          grep -R "!\[" -n exports/knowledge-base.with-media.md | head -n 20
+
+      - name: Publish exports into site downloads (latest + versioned)
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          mkdir -p docs/downloads
+          cp "exports/knowledge-base-${{ steps.exportver.outputs.version }}.pdf"  docs/downloads/knowledge-base-latest.pdf
+          cp "exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx" docs/downloads/knowledge-base-latest.docx
+          cp "exports/knowledge-base-${{ steps.exportver.outputs.version }}.pdf"  "docs/downloads/knowledge-base-${{ steps.exportver.outputs.version }}.pdf"
+          cp "exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx" "docs/downloads/knowledge-base-${{ steps.exportver.outputs.version }}.docx"
+
+      - name: Upload versioned export artifact
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: knowledge-base-exports-${{ steps.exportver.outputs.version }}
+          path: |
+            exports/knowledge-base-${{ steps.exportver.outputs.version }}.pdf
+            exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx
+            exports/knowledge-base.md
+          
+      - name: Debug — list export directory
+        if: always()
+        shell: bash
+        run: |
+          set -euxo pipefail
+          echo "PWD: $(pwd)"
+          echo "Workspace: $GITHUB_WORKSPACE"
+          echo "Export dir: ${EXPORT_DIR:-./docs}"
+
+          dir="${EXPORT_DIR:-./docs}"
+
+          if [ -d "$dir" ]; then
+            echo "== ls -la =="
+            ls -la "$dir"
+            echo
+            echo "== tree (if available) =="
+            command -v tree >/dev/null 2>&1 && tree -a "$dir" || echo "tree not installed"
+            echo
+            echo "== du -h =="
+            du -h -d 2 "$dir" 2>/dev/null || du -h "$dir"
+            echo
+            echo "== file types (top 200) =="
+            find "$dir" -maxdepth 5 -type f -print0 | xargs -0 -n1 file | head -n 200 || true
+          else
+            echo "Directory does not exist: $dir"
+          fi
+
+      # Build the HTML site (includes published downloads)
+      - name: Build MkDocs (strict)
+        run: python -m mkdocs build --strict
+
+      - name: Upload artifact to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ github.ref == 'refs/heads/main' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

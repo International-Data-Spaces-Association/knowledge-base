@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  docs:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/site
+    environment:
+      # Optional: provide a PAT to pull sources locally (not required if you cloned sources beside)
+      - SOURCE_REPOS_PAT=${SOURCE_REPOS_PAT:-}

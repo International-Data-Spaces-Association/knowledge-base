@@ -1,0 +1,13 @@
+# Lychee link checker configuration
+exclude = [
+  "mailto:security@your-org.example",
+  "mailto:privacy@your-org.example"
+]
+# Retry for flaky endpoints
+retry_wait_time = 2
+max_retries = 3
+# Cache to reduce rate limits across runs
+cache = true
+cache_path = ".lycheecache"
+# Accept common redirect codes
+accept = [200, 206, 301, 302, 429]
