@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KB Menu Editor — visual preview</title>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+  <style>
+    :root {
+      --kb-bg: #f6f7f9;
+      --kb-surface: #ffffff;
+      --kb-border: #e1e4e8;
+      --kb-border-strong: #c8ccd1;
+      --kb-text: #1f2328;
+      --kb-text-muted: #57606a;
+      --kb-primary: #0969da;
+      --kb-primary-hover: #0860c7;
+      --kb-danger: #cf222e;
+      --kb-danger-soft: #ffebe9;
+      --kb-success: #1a7f37;
+      --kb-success-soft: #dafbe1;
+      --kb-warn: #9a6700;
+      --kb-warn-soft: #fff8c5;
+      --kb-shadow: 0 1px 3px rgba(27, 31, 36, 0.08);
+      --kb-radius: 6px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--kb-bg); color: var(--kb-text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 14px; line-height: 1.5; }
+    code { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      background: rgba(175, 184, 193, 0.2); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.92em; }
+    a { color: var(--kb-primary); }
+
+    .kb-preview-banner {
+      background: #fff8c5;
+      border-bottom: 1px solid #f0d77a;
+      color: #6a4f00;
+      padding: 8px 16px;
+      font-size: 0.88em;
+      text-align: center;
+    }
+    .kb-preview-banner strong { color: #4a3700; }
+
+    .kb-mock-topbar {
+      background: #1a1a2e;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .kb-mock-topbar__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .kb-mock-logo {
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+    .kb-mock-logo small { font-weight: 400; opacity: 0.7; font-size: 0.78em; margin-left: 6px; }
+    .kb-mock-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+    .kb-mock-tab {
+      color: rgba(255,255,255,0.85);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.92em;
+      cursor: default;
+      position: relative;
+    }
+    .kb-mock-tab:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .kb-mock-tab--has-children::after { content: " ▾"; opacity: 0.6; font-size: 0.85em; }
+
+    .kb-admin-header { background: var(--kb-surface); border-bottom: 1px solid var(--kb-border); box-shadow: var(--kb-shadow); }
+    .kb-admin-header__inner { max-width: 960px; margin: 0 auto; padding: 20px 24px; }
+    .kb-admin-header h1 { margin: 0 0 6px; font-size: 1.4rem; font-weight: 600; }
+    .kb-admin-header__sub { margin: 0; color: var(--kb-text-muted); font-size: 0.95em; }
+
+    .kb-admin-main { max-width: 960px; margin: 0 auto; padding: 24px; }
+
+    .kb-admin-toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+    .kb-spacer { flex: 1; }
+
+    .kb-btn { appearance: none; border: 1px solid var(--kb-border-strong); background: var(--kb-surface);
+      color: var(--kb-text); padding: 6px 14px; border-radius: var(--kb-radius); font: inherit; cursor: pointer;
+      transition: background-color 0.12s, border-color 0.12s; }
+    .kb-btn:hover { background: #f3f4f6; }
+    .kb-btn--primary { background: var(--kb-primary); color: #fff; border-color: var(--kb-primary); }
+    .kb-btn--primary:hover { background: var(--kb-primary-hover); border-color: var(--kb-primary-hover); }
+    .kb-btn--ghost { border: none; background: transparent; padding: 4px 8px; color: var(--kb-text-muted); }
+    .kb-btn--ghost:hover { background: #eef0f2; color: var(--kb-text); }
+    .kb-btn--ghost.kb-btn--delete:hover { background: var(--kb-danger-soft); color: var(--kb-danger); }
+
+    .kb-status { margin-bottom: 14px; padding: 10px 14px; border-radius: var(--kb-radius); border: 1px solid transparent; }
+    .kb-status--info    { background: #ddf4ff; border-color: #b6e3ff; color: #0550ae; }
+    .kb-status--success { background: var(--kb-success-soft); border-color: #aceebb; color: var(--kb-success); }
+
+    .kb-editor { background: var(--kb-surface); border: 1px solid var(--kb-border);
+      border-radius: var(--kb-radius); padding: 12px; box-shadow: var(--kb-shadow); }
+
+    .kb-tree, .kb-children { list-style: none; margin: 0; padding: 0; }
+    .kb-children { margin: 8px 0 4px 32px; padding-left: 12px; border-left: 2px dashed var(--kb-border); }
+
+    .kb-item { background: var(--kb-surface); border: 1px solid var(--kb-border);
+      border-radius: var(--kb-radius); margin-bottom: 8px; transition: border-color 0.12s, box-shadow 0.12s; }
+    .kb-item__row { display: flex; align-items: center; gap: 8px; padding: 8px 10px; }
+
+    .kb-handle { appearance: none; border: none; background: transparent; cursor: grab;
+      color: var(--kb-text-muted); font-size: 1.1em; padding: 4px 6px; user-select: none; }
+    .kb-handle:active { cursor: grabbing; }
+
+    .kb-item__fields { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .kb-item__label { font-weight: 600; font-size: 0.95em; }
+    .kb-item__url-wrap { display: flex; gap: 6px; flex-wrap: wrap; }
+    .kb-item__url { flex: 1 1 240px; min-width: 160px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em; color: var(--kb-text-muted); }
+    .kb-item__url[hidden], .kb-item__external[hidden] { display: none !important; }
+    .kb-item input[type="text"], .kb-item select { appearance: none; border: 1px solid var(--kb-border-strong);
+      border-radius: 4px; padding: 5px 8px; font: inherit; background: var(--kb-surface); color: var(--kb-text); }
+    .kb-item input[type="text"]:focus, .kb-item select:focus { outline: none;
+      border-color: var(--kb-primary); box-shadow: 0 0 0 2px rgba(9, 105, 218, 0.25); }
+    .kb-item__kind, .kb-item__external { flex: 0 0 auto; }
+    .kb-item__actions { display: flex; gap: 4px; flex-shrink: 0; }
+    .kb-item[data-kind="dropdown"] .kb-item__url, .kb-item[data-kind="external"] .kb-item__url { display: none; }
+
+    .kb-ghost { opacity: 0.4; background: #f0f6fc; }
+    .kb-drag { box-shadow: 0 4px 14px rgba(27, 31, 36, 0.18); }
+
+    .kb-mock-topbar.kb-mock-topbar--updating .kb-mock-tabs { animation: kbflash 0.4s ease; }
+    @keyframes kbflash { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+
+    @media (max-width: 600px) {
+      .kb-item__url-wrap { flex-direction: column; }
+      .kb-children { margin-left: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="kb-preview-banner">
+    <strong>Visual preview only.</strong>
+    Drag-drop, add/remove, type changes, and live mock top-bar all work.
+    PR/save flow is disabled — see <code>admin/index.html</code> for the real editor.
+  </div>
+
+  <!-- Mock of the live site's top bar, kept in sync as you edit -->
+  <div class="kb-mock-topbar" id="kb-mock-topbar">
+    <div class="kb-mock-topbar__inner">
+      <div class="kb-mock-logo">IDSA Knowledge Base <small>(mock header preview)</small></div>
+      <nav class="kb-mock-tabs" id="kb-mock-tabs"></nav>
+    </div>
+  </div>
+
+  <header class="kb-admin-header">
+    <div class="kb-admin-header__inner">
+      <h1>Top-bar menu editor</h1>
+      <p class="kb-admin-header__sub">
+        Drag <code>⋮⋮</code> to reorder. Switch type to <em>Dropdown</em> to nest items.
+        The dark bar above is a live mock of the rendered tabs.
+      </p>
+    </div>
+  </header>
+
+  <main class="kb-admin-main">
+    <section class="kb-admin-toolbar">
+      <button id="kb-btn-add-item" class="kb-btn kb-btn--primary" type="button">+ Add top-level item</button>
+      <button id="kb-btn-reset" class="kb-btn" type="button">Reset to default</button>
+      <span class="kb-spacer"></span>
+      <button class="kb-btn" type="button" disabled title="Disabled in preview">Preview JSON</button>
+      <button class="kb-btn" type="button" disabled title="Disabled in preview">Download menu.json</button>
+      <button class="kb-btn kb-btn--primary" type="button" disabled title="Disabled in preview">Save &amp; open PR…</button>
+    </section>
+
+    <div class="kb-status kb-status--info">
+      Edits in this preview are not saved. Mock top bar above re-renders on every change.
+    </div>
+
+    <section class="kb-editor">
+      <ol id="kb-tree" class="kb-tree" aria-label="Top-bar menu items"></ol>
+    </section>
+  </main>
+
+  <template id="kb-item-template">
+    <li class="kb-item" data-kind="link">
+      <div class="kb-item__row">
+        <button class="kb-handle" type="button" aria-label="Drag to reorder" title="Drag to reorder">⋮⋮</button>
+        <div class="kb-item__fields">
+          <input class="kb-item__label" type="text" placeholder="Label (e.g. Knowledge)" />
+          <div class="kb-item__url-wrap">
+            <input class="kb-item__url" type="text" placeholder="docs path or https://…" />
+            <select class="kb-item__kind" aria-label="Item type">
+              <option value="link">Link</option>
+              <option value="dropdown">Dropdown (no URL)</option>
+              <option value="external">External section</option>
+            </select>
+            <select class="kb-item__external" aria-label="External section" hidden>
+              <option value="rulebook">Rulebook</option>
+              <option value="ram5">RAM 5</option>
+              <option value="glossary">Glossary</option>
+            </select>
+          </div>
+        </div>
+        <div class="kb-item__actions">
+          <button class="kb-btn kb-btn--ghost kb-btn--add-child" type="button" title="Add child">+ Child</button>
+          <button class="kb-btn kb-btn--ghost kb-btn--delete" type="button" title="Delete">✕</button>
+        </div>
+      </div>
+      <ol class="kb-children" hidden></ol>
+    </li>
+  </template>
+
+  <script>
+  (() => {
+    "use strict";
+    const SEED = {
+      items: [
+        { label: "Home", url: "index.md" },
+        { label: "What is a data space?", url: "dataspace.md" },
+        { label: "Manifesto of International Data Spaces", url: "external/manifesto/manifesto.md" },
+        { label: "Knowledge", children: [
+            { label: "Rulebook", external_section: "rulebook" },
+            { label: "RAM 5", external_section: "ram5" },
+            { label: "Glossary", external_section: "glossary" }
+        ]},
+        { label: "Standards and specifications", url: "standards.md" },
+        { label: "Downloads", url: "downloads/index.md" },
+        { label: "About", url: "about.md" }
+      ]
+    };
+
+    const $ = (s, r = document) => r.querySelector(s);
+    const tree = $("#kb-tree");
+    const tpl = $("#kb-item-template");
+    const mockTabs = $("#kb-mock-tabs");
+    const mockBar = $("#kb-mock-topbar");
+
+    function makeItemEl(item = { label: "", url: "" }) {
+      const node = tpl.content.firstElementChild.cloneNode(true);
+      const labelInput = $(".kb-item__label", node);
+      const urlInput = $(".kb-item__url", node);
+      const kindSelect = $(".kb-item__kind", node);
+      const externalSelect = $(".kb-item__external", node);
+      const childrenList = $(".kb-children", node);
+
+      labelInput.value = item.label ?? "";
+      let kind = "link";
+      if (Array.isArray(item.children)) kind = "dropdown";
+      else if (item.external_section) kind = "external";
+      kindSelect.value = kind;
+      if (kind === "link") urlInput.value = item.url ?? "";
+      else if (kind === "external") externalSelect.value = item.external_section || "rulebook";
+      applyKind(node, kind);
+
+      if (kind === "dropdown" && Array.isArray(item.children)) {
+        for (const c of item.children) childrenList.appendChild(makeItemEl(c));
+      }
+      wireItem(node);
+      return node;
+    }
+
+    function applyKind(node, kind) {
+      node.dataset.kind = kind;
+      const urlInput = $(".kb-item__url", node);
+      const externalSelect = $(".kb-item__external", node);
+      const childrenList = $(".kb-children", node);
+      const addChildBtn = $(".kb-btn--add-child", node);
+      urlInput.hidden = kind !== "link";
+      externalSelect.hidden = kind !== "external";
+      childrenList.hidden = kind !== "dropdown";
+      addChildBtn.hidden = kind !== "dropdown";
+      if (kind === "dropdown" && childrenList.children.length === 0) {
+        childrenList.appendChild(makeItemEl({ label: "", url: "" }));
+      }
+    }
+
+    function wireItem(node) {
+      const kindSelect = $(".kb-item__kind", node);
+      const deleteBtn = $(".kb-btn--delete", node);
+      const addChildBtn = $(".kb-btn--add-child", node);
+      const childrenList = $(".kb-children", node);
+
+      kindSelect.addEventListener("change", () => { applyKind(node, kindSelect.value); renderMock(); });
+      deleteBtn.addEventListener("click", () => {
+        if (confirm(`Delete "${$(".kb-item__label", node).value || "(untitled)"}"?`)) { node.remove(); renderMock(); }
+      });
+      addChildBtn.addEventListener("click", () => {
+        childrenList.appendChild(makeItemEl({ label: "New item", url: "" }));
+        childrenList.hidden = false;
+        renderMock();
+      });
+      node.addEventListener("input", renderMock);
+      initSortable(childrenList);
+    }
+
+    function initSortable(list) {
+      if (!window.Sortable || list.dataset.kbSortable) return;
+      list.dataset.kbSortable = "1";
+      new Sortable(list, {
+        group: "kb-menu", handle: ".kb-handle", animation: 150,
+        ghostClass: "kb-ghost", dragClass: "kb-drag",
+        fallbackOnBody: true, invertSwap: true,
+        onEnd: renderMock,
+      });
+    }
+
+    function serializeItem(node) {
+      const label = $(".kb-item__label", node).value.trim();
+      const kind = node.dataset.kind || "link";
+      if (kind === "external") return { label, external_section: $(".kb-item__external", node).value };
+      if (kind === "dropdown") return { label, children: Array.from($(".kb-children", node).children).map(serializeItem) };
+      return { label, url: $(".kb-item__url", node).value.trim() };
+    }
+
+    function renderMock() {
+      mockBar.classList.add("kb-mock-topbar--updating");
+      mockTabs.innerHTML = "";
+      const items = Array.from(tree.children).map(serializeItem);
+      for (const it of items) {
+        const tab = document.createElement("span");
+        tab.className = "kb-mock-tab";
+        if (Array.isArray(it.children) && it.children.length) tab.classList.add("kb-mock-tab--has-children");
+        tab.textContent = it.label || "(untitled)";
+        const titleParts = [];
+        if (it.url) titleParts.push("→ " + it.url);
+        if (it.external_section) titleParts.push("expanded from upstream " + it.external_section);
+        if (Array.isArray(it.children)) titleParts.push("dropdown: " + it.children.map(c => c.label || "?").join(", "));
+        tab.title = titleParts.join(" · ");
+        mockTabs.appendChild(tab);
+      }
+      setTimeout(() => mockBar.classList.remove("kb-mock-topbar--updating"), 400);
+    }
+
+    function renderConfig(cfg) {
+      tree.innerHTML = "";
+      for (const item of (cfg.items || [])) tree.appendChild(makeItemEl(item));
+      initSortable(tree);
+      renderMock();
+    }
+
+    $("#kb-btn-add-item").addEventListener("click", () => {
+      tree.appendChild(makeItemEl({ label: "New item", url: "" }));
+      renderMock();
+    });
+    $("#kb-btn-reset").addEventListener("click", () => {
+      if (confirm("Reset to the seed menu?")) renderConfig(JSON.parse(JSON.stringify(SEED)));
+    });
+
+    renderConfig(SEED);
+  })();
+  </script>
+</body>
+</html>
