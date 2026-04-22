@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Knowledge Base top-bar menu",
+  "description": "Schema for config/menu.json. Drives top-level tabs in the MkDocs Material header.",
+  "type": "object",
+  "required": ["items"],
+  "properties": {
+    "_comment": { "type": "string" },
+    "$schema": { "type": "string" },
+    "items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/item" }
+    }
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "required": ["label"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Display text for the tab or dropdown entry."
+        },
+        "url": {
+          "type": "string",
+          "description": "Either a docs-relative path (e.g. 'about.md', 'downloads/index.md') or an absolute URL (https://...). Mutually exclusive with `children` and `external_section`."
+        },
+        "external_section": {
+          "type": "string",
+          "enum": ["rulebook", "ram5", "glossary"],
+          "description": "Expand this entry by reading the upstream SUMMARY.md of the named external section. Only valid as a child of a dropdown."
+        },
+        "children": {
+          "type": "array",
+          "description": "Sub-items shown in a dropdown. When present, this item becomes a dropdown header (no `url`).",
+          "items": { "$ref": "#/$defs/item" }
+        }
+      },
+      "oneOf": [
+        { "required": ["url"], "not": { "required": ["children", "external_section"] } },
+        { "required": ["children"], "not": { "required": ["url", "external_section"] } },
+        { "required": ["external_section"], "not": { "required": ["url", "children"] } }
+      ]
+    }
+  }
+}

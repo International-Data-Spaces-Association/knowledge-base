@@ -17,15 +17,17 @@ Structure produced:
 
 from __future__ import annotations
 
+import json
 import posixpath
 import re
 import sys
 from pathlib import Path
-from typing import Dict, Iterable, List, Tuple
+from typing import Any, Dict, Iterable, List, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = REPO_ROOT / "docs"
 OUT_FILE = DOCS_DIR / "SUMMARY.md"
+MENU_CONFIG = REPO_ROOT / "config" / "menu.json"
 
 ORDER = ["rulebook", "ram5", "glossary"]
 TITLE_MAP = {
@@ -127,6 +129,45 @@ def parse_triplets(args: Iterable[str]) -> Dict[str, Tuple[Path, Path]]:
         out[key] = (Path(src_dir), Path(summ))
     return out
 
+def _render_menu_item(item: Dict[str, Any], depth: int, triplets: Dict[str, Tuple[Path, Path]]) -> List[str]:
+    """Render a single menu.json item to SUMMARY.md bullet lines (recursive)."""
+    indent = "    " * depth
+    label = str(item.get("label", "Untitled"))
+    out: List[str] = []
+    if "external_section" in item:
+        section_key = item["external_section"]
+        title = TITLE_MAP.get(section_key, label)
+        out.append(f"{indent}* {title}")
+        if section_key in triplets:
+            src_root, summ = triplets[section_key]
+            # collect_section_items emits lines pre-indented for depth=2 (top-level dropdown child).
+            # For other depths we re-indent.
+            base_lines = collect_section_items(src_root, summ, section_key)
+            extra = "    " * (depth - 1) if depth > 1 else ""
+            out.extend((extra + ln) if depth > 1 else ln for ln in base_lines)
+        else:
+            out.append(f"{indent}    * *(content not available)*")
+    elif "children" in item and item["children"]:
+        out.append(f"{indent}* {label}")
+        for child in item["children"]:
+            out.extend(_render_menu_item(child, depth + 1, triplets))
+    else:
+        url = str(item.get("url", "")).strip()
+        if not url:
+            out.append(f"{indent}* {label}")
+        else:
+            out.append(f"{indent}* [{label}]({url})")
+    return out
+
+
+def build_summary_from_config(config: Dict[str, Any], triplets: Dict[str, Tuple[Path, Path]]) -> str:
+    """Render docs/SUMMARY.md from a config/menu.json structure."""
+    lines: List[str] = []
+    for item in config.get("items", []):
+        lines.extend(_render_menu_item(item, 0, triplets))
+    return "\n".join(lines) + "\n"
+
+
 def build_merged_summary(triplets: Dict[str, Tuple[Path, Path]]) -> str:
     lines: List[str] = []
 
@@ -164,7 +205,16 @@ def build_merged_summary(triplets: Dict[str, Tuple[Path, Path]]) -> str:
 def main() -> None:
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
     triplets = parse_triplets(sys.argv[1:])
-    merged = build_merged_summary(triplets)
+    if MENU_CONFIG.exists():
+        try:
+            cfg = json.loads(MENU_CONFIG.read_text(encoding="utf-8"))
+            merged = build_summary_from_config(cfg, triplets)
+            print(f"[INFO] Building SUMMARY from {MENU_CONFIG.relative_to(REPO_ROOT)}")
+        except (json.JSONDecodeError, KeyError, TypeError) as exc:
+            print(f"[WARN] {MENU_CONFIG} present but invalid ({exc}); falling back to hardcoded layout")
+            merged = build_merged_summary(triplets)
+    else:
+        merged = build_merged_summary(triplets)
     OUT_FILE.write_text(merged, encoding="utf-8")
     print(f"[INFO] Wrote merged SUMMARY to {OUT_FILE}")
 

@@ -1,0 +1,47 @@
+{
+  "$schema": "./menu.schema.json",
+  "_comment": "Source of truth for the top-bar navigation. Edited via /admin/. Read by scripts/build_summary.py at CI time. Each item becomes a top-level tab; items with `children` become dropdowns. Use `external_section` on a child to expand it from the upstream SUMMARY.md of that section (rulebook, ram5, glossary).",
+  "items": [
+    {
+      "label": "Home",
+      "url": "index.md"
+    },
+    {
+      "label": "What is a data space?",
+      "url": "dataspace.md"
+    },
+    {
+      "label": "Manifesto of International Data Spaces",
+      "url": "external/manifesto/manifesto.md"
+    },
+    {
+      "label": "Knowledge",
+      "children": [
+        {
+          "label": "Rulebook",
+          "external_section": "rulebook"
+        },
+        {
+          "label": "RAM 5",
+          "external_section": "ram5"
+        },
+        {
+          "label": "Glossary",
+          "external_section": "glossary"
+        }
+      ]
+    },
+    {
+      "label": "Standards and specifications",
+      "url": "standards.md"
+    },
+    {
+      "label": "Downloads",
+      "url": "downloads/index.md"
+    },
+    {
+      "label": "About",
+      "url": "about.md"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge Base — Menu Editor</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="kb-admin-header">
+    <div class="kb-admin-header__inner">
+      <h1>Top-bar menu editor</h1>
+      <p class="kb-admin-header__sub">
+        Drag to reorder. Click <em>Add child</em> to nest a dropdown item.
+        Saving opens a Pull Request against <code id="kb-repo-label">…</code>.
+      </p>
+    </div>
+  </header>
+
+  <main class="kb-admin-main">
+    <section class="kb-admin-toolbar">
+      <button id="kb-btn-add-item" class="kb-btn kb-btn--primary" type="button">+ Add top-level item</button>
+      <button id="kb-btn-reset" class="kb-btn" type="button" title="Discard local edits and reload from disk/GitHub">Reset</button>
+      <span class="kb-spacer"></span>
+      <button id="kb-btn-preview" class="kb-btn" type="button">Preview JSON</button>
+      <button id="kb-btn-download" class="kb-btn" type="button">Download menu.json</button>
+      <button id="kb-btn-pr" class="kb-btn kb-btn--primary" type="button">Save &amp; open PR…</button>
+    </section>
+
+    <section id="kb-status" class="kb-status" hidden></section>
+
+    <section class="kb-editor">
+      <ol id="kb-tree" class="kb-tree" aria-label="Top-bar menu items"></ol>
+    </section>
+
+    <section class="kb-preview-pane" id="kb-preview-pane" hidden>
+      <header>
+        <h2>Generated <code>config/menu.json</code></h2>
+        <button id="kb-btn-preview-close" class="kb-btn" type="button" aria-label="Close preview">×</button>
+      </header>
+      <pre id="kb-preview-json"></pre>
+    </section>
+  </main>
+
+  <!-- PR dialog -->
+  <dialog id="kb-pr-dialog" class="kb-dialog">
+    <form method="dialog" id="kb-pr-form">
+      <h2>Open a Pull Request</h2>
+
+      <p class="kb-dialog__hint">
+        This commits an updated <code>config/menu.json</code> to a new branch
+        in <strong id="kb-pr-repo-label">…</strong> and opens a PR against <code id="kb-pr-base-label">main</code>.
+        Your token stays in your browser — nothing is sent to a server.
+      </p>
+
+      <label class="kb-field">
+        <span>GitHub token <span class="kb-req">*</span></span>
+        <input type="password" id="kb-pr-token" autocomplete="off" required
+               placeholder="github_pat_… or ghp_…" />
+        <small>
+          Fine-grained PAT scoped to <code id="kb-pr-repo-hint">this repo</code> with
+          <strong>Contents: Read &amp; Write</strong> + <strong>Pull requests: Read &amp; Write</strong>.
+          <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create one →</a>
+        </small>
+      </label>
+
+      <label class="kb-field kb-field--row">
+        <input type="checkbox" id="kb-pr-remember" />
+        <span>Remember token in this browser (localStorage)</span>
+      </label>
+
+      <label class="kb-field">
+        <span>Branch name</span>
+        <input type="text" id="kb-pr-branch" required placeholder="menu-edit-…" />
+      </label>
+
+      <label class="kb-field">
+        <span>PR title</span>
+        <input type="text" id="kb-pr-title" required placeholder="Update top-bar menu" />
+      </label>
+
+      <label class="kb-field">
+        <span>PR description</span>
+        <textarea id="kb-pr-body" rows="4" placeholder="Describe what changed and why."></textarea>
+      </label>
+
+      <details class="kb-field">
+        <summary>Advanced: target repo</summary>
+        <label class="kb-field">
+          <span>Owner</span>
+          <input type="text" id="kb-pr-owner" required />
+        </label>
+        <label class="kb-field">
+          <span>Repository</span>
+          <input type="text" id="kb-pr-repo" required />
+        </label>
+        <label class="kb-field">
+          <span>Base branch</span>
+          <input type="text" id="kb-pr-base" required value="main" />
+        </label>
+      </details>
+
+      <menu class="kb-dialog__actions">
+        <button type="button" id="kb-pr-cancel" class="kb-btn">Cancel</button>
+        <button type="submit" id="kb-pr-submit" class="kb-btn kb-btn--primary">Open PR</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <!-- Item template -->
+  <template id="kb-item-template">
+    <li class="kb-item" data-kind="link">
+      <div class="kb-item__row">
+        <button class="kb-handle" type="button" aria-label="Drag to reorder" title="Drag to reorder">⋮⋮</button>
+
+        <div class="kb-item__fields">
+          <input class="kb-item__label" type="text" placeholder="Label (e.g. Knowledge)" />
+          <div class="kb-item__url-wrap">
+            <input class="kb-item__url" type="text" placeholder="docs path or https://…" />
+            <select class="kb-item__kind" aria-label="Item type">
+              <option value="link">Link</option>
+              <option value="dropdown">Dropdown (no URL)</option>
+              <option value="external">External section</option>
+            </select>
+            <select class="kb-item__external" aria-label="External section" hidden>
+              <option value="rulebook">Rulebook</option>
+              <option value="ram5">RAM 5</option>
+              <option value="glossary">Glossary</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="kb-item__actions">
+          <button class="kb-btn kb-btn--ghost kb-btn--add-child" type="button" title="Add a child to make this a dropdown">+ Child</button>
+          <button class="kb-btn kb-btn--ghost kb-btn--delete" type="button" title="Delete this item">✕</button>
+        </div>
+      </div>
+
+      <ol class="kb-children" hidden></ol>
+    </li>
+  </template>
+</body>
+</html>
