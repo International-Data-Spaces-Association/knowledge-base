@@ -168,7 +168,6 @@ jobs:
       # Export DOCX + PDF (main only)
       # ---------------------------
       - name: Compute export version
-        if: ${{ github.ref == 'refs/heads/main' }}
         id: exportver
         run: |
           SHORT_SHA="${GITHUB_SHA::7}"
@@ -176,7 +175,6 @@ jobs:
           echo "version=${DATE}-${{ github.run_number }}-${SHORT_SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Build export book markdown (ALL content)
-        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           mkdir -p exports
           python scripts/export_book.py \
@@ -187,7 +185,6 @@ jobs:
             --version "${{ steps.exportver.outputs.version }}"
       
       - name: Stage export media and rewrite image links
-        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           python scripts/export_stage_media.py \
             --docs-dir docs \
@@ -196,7 +193,6 @@ jobs:
             --media-dir exports/media
 
       - name: Generate PDF cover page
-        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           cat > exports/cover.md <<'EOF'
           ---
@@ -216,7 +212,6 @@ jobs:
           EOF
 
       - name: Export DOCX (Pandoc)
-        if: ${{ github.ref == 'refs/heads/main' }}
         uses: docker://pandoc/core:3.9
         with:
           args: >-
@@ -230,7 +225,6 @@ jobs:
             --output=exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx
 
       - name: Export PDF (Pandoc + LaTeX)
-        if: ${{ github.ref == 'refs/heads/main' }}
         uses: docker://pandoc/latex:3.9
         with:
           args: >-
@@ -248,14 +242,12 @@ jobs:
             --output=exports/knowledge-base-${{ steps.exportver.outputs.version }}.pdf
 
       - name: Debug count staged images and sample listing
-        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           ls -la exports/media | head -n 50
           echo "Staged images:" $(ls -1 exports/media | wc -l)
           grep -R "!\[" -n exports/knowledge-base.with-media.md | head -n 20
 
       - name: Publish exports into site downloads (latest + versioned)
-        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           mkdir -p docs/downloads
           cp "exports/knowledge-base-${{ steps.exportver.outputs.version }}.pdf"  docs/downloads/knowledge-base-latest.pdf
@@ -264,7 +256,6 @@ jobs:
           cp "exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx" "docs/downloads/knowledge-base-${{ steps.exportver.outputs.version }}.docx"
 
       - name: Upload versioned export artifact
-        if: ${{ github.ref == 'refs/heads/main' }}
         uses: actions/upload-artifact@v4
         with:
           name: knowledge-base-exports-${{ steps.exportver.outputs.version }}
