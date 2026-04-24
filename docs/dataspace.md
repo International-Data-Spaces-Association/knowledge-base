@@ -69,7 +69,7 @@ and management of claims about the organization.
 
 The **Dataspace Protocol** (ISO/IEC DIS 26450) defines
 publication/discovery, agreement negotiation, and data access
-interactions for interoperable data sharing. [^1]
+interactions for interoperable data sharing. ([Dataspace Protocol Specification on GitHub](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol) [Dataspace Protocol Specification](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/2025-1-err1/))
 
 ## Decentralized identifiers & claims
 
@@ -79,7 +79,7 @@ identity claims.
 
 **Decentralized Claims Protocol**, DCP (ISO/IEC DIS 26451) provides an
 overlay to the Dataspace protocol for organizational identity and
-trust/credential verification while preserving privacy. [^2]
+trust/credential verification while preserving privacy. ([Decentralized Claims Protocol specification on GitHub](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/) [Decentralized Claims Protocol specification](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/v1.0.1/))
 
 ![Decentralized Identifiers and Claims](assets/DS_claims.png)
 
@@ -120,7 +120,3 @@ to domains or use cases.
 **Trusted data sharing between participants in different data spaces is also possible, through measures for interoperability and decentralization.**
 
 ![Cross-data space data sharing](assets/image9.png)
-
-[^1]: <https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/>
-
-[^2]: <https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/>
