@@ -65,7 +65,7 @@ and management of claims about the organization.
 
 **IDS-RAM** describes these capabilities which can be realized using specifications such as the **Dataspace protocol** to ensure interoperable communications.
 
-![Data Space Connectors and the Dataspace Protocol](./media/image3.png)
+![Data Space Connectors and the Dataspace Protocol](assets/image3.png)
 
 The **Dataspace Protocol** (ISO/IEC DIS 26450) defines
 publication/discovery, agreement negotiation, and data access
@@ -108,7 +108,7 @@ spaces](https://internationaldataspaces.org/download/51606/?tmstv=1773925364).
 ***Additional elements help enable interoperability in data spaces.***
 
 ![Figure 6 Standards, profiles and
-vocabulary](./media/image8.svg)
+vocabulary](assets/image8.svg)
 
 Given the diversity of participants in data spaces, data must be
 annotated with shared **vocabularies**, formalized through **open
@@ -119,7 +119,7 @@ to domains or use cases.
 
 **Trusted data sharing between participants in different data spaces is also possible, through measures for interoperability and decentralization.**
 
-![Cross-data space data sharing](./media/image9.png)
+![Cross-data space data sharing](assets/image9.png)
 
 [^1]: <https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/>
 
