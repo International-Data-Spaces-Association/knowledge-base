@@ -3,9 +3,9 @@
 This document gives an overview of the main technical concepts in data
 spaces that have been evolving over the past few years.
 
-These concepts are reflected in the upcoming new versions of IDSA
-Rulebook (v3.0), which defines the foundational concepts, rules and
-requirements for data spaces and IDS-RAM (v2026-1) providing
+These concepts are reflected in the IDSA
+Rulebook, which defines the foundational concepts, rules and
+requirements for data spaces and IDS-RAM providing
 architectural guidance for data spaces.
 
 ## Data spaces
@@ -22,7 +22,7 @@ defines data spaces as
 
 The next sections provide details on some of these elements, please also
 refer to the IDSA Rulebook 3.0, [What is a Data
-space](https://github.com/International-Data-Spaces-Association/IDSA-Rulebook/blob/Rulebook-3.0/003_WhatIsADataspace.md)
+space](external/rulebook/003_WhatIsADataspace.md)
 section for more information.
 
 ## Key roles
@@ -39,9 +39,9 @@ framework. Their goal is to generate value out of the data.
 Participants can act in different roles (data provider, data
 consumer, data holder, etc. ) depending on which facet you are looking
 at a data space from (technical, economic, legal, etc.). See
-[layers](https://github.com/International-Data-Spaces-Association/IDSA-Rulebook/blob/Rulebook-3.0/004_Layers.md)
+[layers](external/rulebook/004_Layers.md)
 and
-[roles](https://github.com/International-Data-Spaces-Association/IDSA-Rulebook/blob/Rulebook-3.0/005_Roles.md)
+[roles](external/rulebook/005_Roles.md)
 pages in the IDSA Rulebook for more details.
 
 The **Data Space Governance Authority** **(DSGA)** provides the overall
@@ -52,7 +52,7 @@ business rules of a data space.
 
 The governance framework may be very simple, or quite complex depending
 on the needs of the data space and the use cases. See [DSGA
-page](https://github.com/International-Data-Spaces-Association/IDSA-Rulebook/blob/Rulebook-3.0/006_DSGA.md)
+page](external/rulebook/006_DSGA.md)
 in the Rulebook for more details.
 
 ## Data Space Connectors and the Dataspace Protocol
@@ -69,7 +69,7 @@ and management of claims about the organization.
 
 The **Dataspace Protocol** (ISO/IEC DIS 26450) defines
 publication/discovery, agreement negotiation, and data access
-interactions for interoperable data sharing. ([Dataspace Protocol Specification on GitHub](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol) [Dataspace Protocol Specification](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/2025-1-err1/))
+interactions for interoperable data sharing. ([Dataspace Protocol Specification on GitHub](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol) and [Dataspace Protocol Specification](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/2025-1-err1/))
 
 ## Decentralized identifiers & claims
 
@@ -79,7 +79,7 @@ identity claims.
 
 **Decentralized Claims Protocol**, DCP (ISO/IEC DIS 26451) provides an
 overlay to the Dataspace protocol for organizational identity and
-trust/credential verification while preserving privacy. ([Decentralized Claims Protocol specification on GitHub](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/) [Decentralized Claims Protocol specification](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/v1.0.1/))
+trust/credential verification while preserving privacy. ([Decentralized Claims Protocol specification on GitHub](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/) and [Decentralized Claims Protocol specification](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/v1.0.1/))
 
 ![Decentralized Identifiers and Claims](assets/DS_claims.png)
 
