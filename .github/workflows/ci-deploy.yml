@@ -82,13 +82,13 @@ jobs:
           path: _sources/rulebook
           token: ${{ secrets.SOURCE_REPOS_PAT }}
 
-      - name: Checkout RAM5
+      - name: Checkout IDS-RAM
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
         uses: actions/checkout@v4
         with:
-          repository: International-Data-Spaces-Association/RAM5
+          repository: International-Data-Spaces-Association/IDS-RAM
           ref: main
-          path: _sources/ram5
+          path: _sources/ram
           token: ${{ secrets.SOURCE_REPOS_PAT }}
 
       - name: Checkout Glossary
