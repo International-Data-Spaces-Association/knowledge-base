@@ -19,7 +19,7 @@ This guide walks through the setup required to operate the `knowledge-base` site
   - Value: a **read‑only** Personal Access Token with `repo` (read) scope that can access:
     - `International-Data-Spaces-Association/IDSA-Rulebook`
     - `International-Data-Spaces-Association/IDS-RAM`
-    - `International-Data-Spaces-Association/members-area`
+    - `International-Data-Spaces-Association/glossary`
 
 > Least privilege: this PAT is used **only** for checking out the source repositories.
 
@@ -54,11 +54,11 @@ mkdocs serve -a 0.0.0.0:8000
 
    - documentation/SUMMARY.md (Rulebook)
    - docs/summary.md (IDS-RAM)
-   - OrganizationalHandbook/summary.md (Handbook)
+   - glossary/summary.md (glossary)
 
 
 - We concatenate them (in that order) with H2 headings and rewrite links so they point to:
-   -   external/rulebook/..., external/ram/..., external/handbook/...
+   -   external/rulebook/..., external/ram/..., external/glossary/...
 
 - The merged docs/SUMMARY.md drives the left navigation (via mkdocs-literate-nav).
 
