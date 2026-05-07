@@ -6,6 +6,8 @@ theme:
   favicon: assets/favicon.png
   logo: assets/IDSA-logo_2.png
   custom_dir: overrides
+  static_templates:
+    - 404.html
   features:
     - navigation.tabs
     - navigation.top
@@ -14,8 +16,6 @@ theme:
   palette:
     primary: custom
     accent: custom
-static_templates:
-  - 404.html
 extra_css:
   - assets/styles.css
 plugins:
