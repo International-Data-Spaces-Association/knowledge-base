@@ -21,7 +21,7 @@ defines data spaces as
 **environment enabling trusted data sharing between participating parties, based on an agreed governance framework, along with an agreed set of policies, semantic models, standardised protocols, processes, and facilitating services.**
 
 The next sections provide details on some of these elements, please also
-refer to the IDSA Rulebook 3.0, [What is a Data
+refer to the IDSA Rulebook, [What is a Data
 space](external/rulebook/003_WhatIsADataspace.md)
 section for more information.
 
