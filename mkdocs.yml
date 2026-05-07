@@ -22,6 +22,59 @@ plugins:
       enable_creation_date: true
   - literate-nav:
       nav_file: SUMMARY.md
+    - redirects:
+      redirect_maps:
+        # ── Rulebook ──────────────────────────────────────────────────
+        'ids-knowledgebase/idsa-rulebook': 'external/rulebook/001_Introduction/'
+        'ids-knowledgebase/idsa-rulebook/fundamentals/002_guidingprinciples': 'external/rulebook/002_GuidingPrinciples/'
+        'ids-knowledgebase/idsa-rulebook/fundamentals/003_whatisadataspace': 'external/rulebook/003_WhatIsADataspace/'
+        'ids-knowledgebase/idsa-rulebook/fundamentals/004_layers': 'external/rulebook/004_Layers/'
+        'ids-knowledgebase/idsa-rulebook/fundamentals/005_roles': 'external/rulebook/005_Roles/'
+        'ids-knowledgebase/idsa-rulebook/fundamentals/006_dsga': 'external/rulebook/006_DSGA/'
+        'ids-knowledgebase/idsa-rulebook/fundamentals/007_decentralization': 'external/rulebook/007_Decentralization/'
+        'ids-knowledgebase/idsa-rulebook/fundamentals/008_trust': 'external/rulebook/008_Trust/'
+        'ids-knowledgebase/idsa-rulebook/fundamentals/009_dataspace_trust_frameworks': 'external/rulebook/009_Dataspace_Trust_Frameworks/'
+        'ids-knowledgebase/idsa-rulebook/fundamentals/010_planes': 'external/rulebook/010_Planes/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/100_functional_requirements': 'external/rulebook/100_Functional_Requirements/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/101_achieving_autonomy_and_agency': 'external/rulebook/101_Achieving_Autonomy_and_Agency/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/102_foundational_concepts_of_a_data_space': 'external/rulebook/102_Foundational_concepts_of_a_data_space/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/103_establishing_trust': 'external/rulebook/103_Establishing_Trust/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/104_attributes_and_claims': 'external/rulebook/104_Attributes_and_claims/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/105_policies': 'external/rulebook/105_Policies/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/106_dataspace_membership': 'external/rulebook/106_Dataspace_Membership/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/107_identity': 'external/rulebook/107_Identity/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/108_data_space_participation': 'external/rulebook/108_Data_space_participation/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/110_data_sharing': 'external/rulebook/110_Data_sharing/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/114_creating_a_data_space': 'external/rulebook/114_Creating_a_data_space/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/115_interoperability_in_data_spaces': 'external/rulebook/115_Interoperability_in_data_spaces/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/120_datadiscoveryservices': 'external/rulebook/120_DataDiscoveryServices/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/121_observability': 'external/rulebook/121_Observability/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/122_vocabularies': 'external/rulebook/122_Vocabularies/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/123_marketplaces': 'external/rulebook/123_Marketplaces/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/124_processingservices': 'external/rulebook/124_ProcessingServices/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/125_connector': 'external/rulebook/125_Connector/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/130_ai_agents': 'external/rulebook/130_AI_Agents/'
+        'ids-knowledgebase/idsa-rulebook/functional-requirements/140_decentralized_patterns_onboarding': 'external/rulebook/140_Decentralized_Patterns_Onboarding/'
+        'ids-knowledgebase/idsa-rulebook/summary/999_summary_outlook': 'external/rulebook/999_Summary_Outlook/'
+        'ids-knowledgebase/idsa-rulebook/imprint-and-external-links/frontmatter': 'external/rulebook/FrontMatter/'
+ 
+        # ── RAM 5 ─────────────────────────────────────────────────────
+        'ids-knowledgebase/ids-ram-5-working-draft': 'external/ram5/'
+        'ids-knowledgebase/ids-ram-5-working-draft/docs/introduction': 'external/ram5/Introduction/'
+        'ids-knowledgebase/ids-ram-5-working-draft/docs/context': 'external/ram5/Context/'
+        'ids-knowledgebase/ids-ram-5-working-draft/docs/principles': 'external/ram5/Principles/'
+        'ids-knowledgebase/ids-ram-5-working-draft/docs/pattern': 'external/ram5/Pattern/'
+        'ids-knowledgebase/ids-ram-5-working-draft/docs/outlook': 'external/ram5/Outlook/'
+        'ids-knowledgebase/ids-ram-5-working-draft/docs/summary': 'external/ram5/'
+ 
+        # ── Manifesto ─────────────────────────────────────────────────
+        'ids-knowledgebase/manifesto-for-international-dataspaces': 'external/manifesto/manifesto/'
+ 
+        # ── Not in new KB yet → redirect to nearest section ──────────
+        'ids-knowledgebase/ids-ram-4': '.'
+        'ids-knowledgebase/dataspace-protocol': 'standards/'
+        'ids-knowledgebase/ids-reference-testbed': '.'
+        'ids-knowledgebase/odrl-profile-for-ids': 'standards/'
 markdown_extensions:
   - admonition
   - toc:
