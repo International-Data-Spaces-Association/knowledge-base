@@ -202,7 +202,7 @@ jobs:
           date: ""
           license: "CC BY 4.0"
           citation: |
-            IDSA Knowledge Base, version ${{ steps.exportver.outputs.version }}, International Data Spaces Association (IDSA)
+            IDSA Knowledge Base, International Data Spaces Association (IDSA), 2026
           ---
           
           \newpage
@@ -219,6 +219,9 @@ jobs:
             --number-sections
             --reference-doc=assets/templates/reference.docx
             --resource-path=exports:exports/media:docs:docs/external:docs/assets
+            -- mainfont="Noto Sans"
+            -- sansfont="Noto Sans"
+            -- monofont="Fira Code"
             --output=exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx
 
       - name: Export PDF (Pandoc + LaTeX)
