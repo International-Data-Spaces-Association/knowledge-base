@@ -67,11 +67,6 @@ plugins:
         'ids-knowledgebase/ids-ram-5-working-draft/docs/summary': 'external/ram5/' 
         # ── Manifesto ─────────────────────────────────────────────────
         'ids-knowledgebase/manifesto-for-international-dataspaces': 'external/manifesto/manifesto/'
-        # ── Not in new KB yet → redirect to nearest section ──────────
-        'ids-knowledgebase/ids-ram-4': '.'
-        'ids-knowledgebase/dataspace-protocol': 'standards/'
-        'ids-knowledgebase/ids-reference-testbed': '.'
-        'ids-knowledgebase/odrl-profile-for-ids': 'standards/'
 markdown_extensions:
   - admonition
   - toc:
