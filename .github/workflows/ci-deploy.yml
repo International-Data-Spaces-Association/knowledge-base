@@ -123,15 +123,6 @@ jobs:
         run: |
           python scripts/verify_env.py
 
-      - name: Install fonts
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y fonts-noto
-          sudo apt-get install -y fonts-roboto
-  
-      - name: List fonts
-        run: fc-list | sort
-
       - name: Assemble external content & build merged SUMMARY
         run: |
           python scripts/sync_external_content.py
@@ -244,9 +235,6 @@ jobs:
             -V papersize=a4
             -V geometry:margin=2.5cm
             -V fontsize=11pt
-            -V mainfont="Noto Sans"
-            -V sansfont="Noto Sans"
-            -V monofont="Fira Code"
             --resource-path=exports:exports/media:docs:docs/external:docs/assets
             --output=exports/knowledge-base-${{ steps.exportver.outputs.version }}.pdf
 
