@@ -16,7 +16,7 @@ This Knowledge Base integrates curated documentation into a single destination:
 
 - `International-Data-Spaces-Association/Manifestor-of-International-Data-Spaces` (`/`)
 - `International-Data-Spaces-Association/IDSA-Rulebook` (`documentation/`)
-- `International-Data-Spaces-Association/RAM5` (`docs/`)
+- `International-Data-Spaces-Association/IDS-RAM` (`docs/`)
 - `International-Data-Spaces-Association/glossary` (`Glossary/`)
 
 All external content is **copied during CI only** and **never committed** back to this repository.
