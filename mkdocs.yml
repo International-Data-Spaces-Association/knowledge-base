@@ -66,7 +66,7 @@ plugins:
         'ids-knowledgebase/ids-ram-5-working-draft/docs/principles': 'external/ram/Principles.md'
         'ids-knowledgebase/ids-ram-5-working-draft/docs/pattern': 'external/ram/Pattern.md'
         'ids-knowledgebase/ids-ram-5-working-draft/docs/outlook': 'external/ram/Outlook.md'
-        'ids-knowledgebase/ids-ram-5-working-draft/docs/summary': 'external/ram/.md 
+        'ids-knowledgebase/ids-ram-5-working-draft/docs/summary': 'external/ram/README.md'
         # ── Manifesto ─────────────────────────────────────────────────
         'ids-knowledgebase/manifesto-for-international-dataspaces': 'external/manifesto/manifesto.md'
 markdown_extensions:
