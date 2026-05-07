@@ -122,6 +122,12 @@ jobs:
       - name: Verify mkdocs + literate-nav in this env
         run: |
           python scripts/verify_env.py
+
+      - name: Install fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto
+          sudo apt-get install -y fonts-roboto
   
       - name: List fonts
         run: fc-list | sort
