@@ -131,6 +131,10 @@ def main() -> None:
     parts.append(f"**Version:** {args.version}  ")
     parts.append(f"**Generated:** {now}")
     parts.append("")
+    parts.append("License: CC-BY-4.0  ")
+    parts.append("")
+    parts.append("Cite as: IDSA Knowledge Base, version {args.version}, International Data Spaces Association (IDSA),")
+    parts.append("")
     parts.append("\\newpage")
     parts.append("")
 
