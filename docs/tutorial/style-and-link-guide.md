@@ -230,7 +230,7 @@ If we enable **mkdocs‑autorefs**, you can reference headings from other pages 
 
 ### Appendix A — Working Examples
 
-#### Cross‑repo link from Rulebook → RAM 
+#### Cross‑repo link from Rulebook → RAM
 
 See ../ram/RAM1.md#trust-framework for the RAM view.
 
