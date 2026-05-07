@@ -1,6 +1,6 @@
 # Contributor Linking & Markdown Style Guide
 
-> **Scope:** This guide applies to all content authored for the `knowledge-base` and the three aggregated sources (Rulebook, RAM 5, Organizational Handbook). It explains **how to link**, **how to structure Markdown**, and **what to avoid**, so your content works locally, in CI, and on GitHub Pages.
+> **Scope:** This guide applies to all content authored for the `knowledge-base` and the three aggregated sources (Rulebook, RAM, Organizational Handbook). It explains **how to link**, **how to structure Markdown**, and **what to avoid**, so your content works locally, in CI, and on GitHub Pages.
 
 ---
 
@@ -18,7 +18,7 @@ Our site aggregates Markdown from several repositories into a single static site
 
 ```md
 external/rulebook/Rulebook_content_1.md
-../ram5/RAM1.md
+../ram/RAM1.md
 index.md
 about.md#team
 ````
@@ -47,10 +47,10 @@ During CI, content from the three source repositories is copied under:
     external/rulebook/Rulebook_content_1.md
     ```
 
-* From a Rulebook page → RAM 5 page:
+* From a Rulebook page → RAM page:
 
     ```md
-    ../ram5/RAM1.md
+    ../ram/RAM1.md
     ```
 
 * From any external page → Home:
@@ -74,7 +74,7 @@ MkDocs resolves these **relative links** and publishes the same structure to the
     #trust-framework
 
     # cross-page
-    external/ram5/RAM1.md#trust-framework
+    external/ram/RAM1.md#trust-framework
     ```
 
     Anchors come from headings; you can also use plugins like **mkdocs‑autorefs** to reference headings by name without paths if enabled.
@@ -171,7 +171,7 @@ We use **mkdocs‑literate‑nav** to build the left navigation from `docs/SUMMA
 
 ## 8) Writing Content for Aggregated Repos
 
-When editing content **inside source repositories**, keep links **relative to the repo’s docs root** and avoid hard‑coded GitHub links. CI copies content under `external/<repo>/...`; relative links continue to work after the move. If a cross‑repo link is required, use the runtime path `external/<repo>/...` (or a valid sibling relative path like `../ram5/...`) per §2. [\[github.com\]](https://github.com/oprypin/mkdocs-literate-nav)
+When editing content **inside source repositories**, keep links **relative to the repo’s docs root** and avoid hard‑coded GitHub links. CI copies content under `external/<repo>/...`; relative links continue to work after the move. If a cross‑repo link is required, use the runtime path `external/<repo>/...` (or a valid sibling relative path like `../ram/...`) per §2. [\[github.com\]](https://github.com/oprypin/mkdocs-literate-nav)
 
 ---
 
@@ -230,9 +230,9 @@ If we enable **mkdocs‑autorefs**, you can reference headings from other pages 
 
 ### Appendix A — Working Examples
 
-#### Cross‑repo link from Rulebook → RAM 5
+#### Cross‑repo link from Rulebook → RAM 
 
-See ../ram5/RAM1.md#trust-framework for the RAM view.
+See ../ram/RAM1.md#trust-framework for the RAM view.
 
 #### Home & About
 
