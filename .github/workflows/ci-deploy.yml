@@ -122,6 +122,9 @@ jobs:
       - name: Verify mkdocs + literate-nav in this env
         run: |
           python scripts/verify_env.py
+  
+      - name: List fonts
+        run: fc-list | sort
 
       - name: Assemble external content & build merged SUMMARY
         run: |
@@ -219,9 +222,6 @@ jobs:
             --number-sections
             --reference-doc=assets/templates/reference.docx
             --resource-path=exports:exports/media:docs:docs/external:docs/assets
-            -- mainfont="Noto Sans"
-            -- sansfont="Noto Sans"
-            -- monofont="Fira Code"
             --output=exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx
 
       - name: Export PDF (Pandoc + LaTeX)
@@ -238,6 +238,9 @@ jobs:
             -V papersize=a4
             -V geometry:margin=2.5cm
             -V fontsize=11pt
+            -- mainfont="Noto Sans"
+            -- sansfont="Noto Sans"
+            -- monofont="Fira Code"
             --resource-path=exports:exports/media:docs:docs/external:docs/assets
             --output=exports/knowledge-base-${{ steps.exportver.outputs.version }}.pdf
 
