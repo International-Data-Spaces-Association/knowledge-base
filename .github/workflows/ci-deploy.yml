@@ -207,14 +207,11 @@ jobs:
           
           # IDSA Knowledge Base
           ---
-          **Version:** ${{ steps.exportver.outputs.version }}
           
-          **Generated:** $(date -u +'%Y-%m-%d')
-          --- 
-          ## License
-          {{ license }}
-          ## How to Cite
-          {{ citation }}
+          **License: CC BY 4.0**
+          
+          **How to Cite: IDSA Knowledge Base, International Data Spaces Association (IDSA), 2026**
+          
           ---
           \newpage
           EOF
