@@ -8,8 +8,8 @@ Structure produced:
     * Rulebook
         * [Label](external/rulebook/...)
         * *.md
-    * RAM 5
-        * [Label](external/ram5/...)
+    * RAM
+        * [Label](external/ram/...)
     * Glossary
         * [Label](external/glossary/...)
 * [About](about.md)
@@ -27,10 +27,10 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = REPO_ROOT / "docs"
 OUT_FILE = DOCS_DIR / "SUMMARY.md"
 
-ORDER = ["rulebook", "ram5", "glossary"]
+ORDER = ["rulebook", "ram", "glossary"]
 TITLE_MAP = {
     "rulebook": "Rulebook",
-    "ram5": "RAM 5",
+    "ram": "RAM",
     "glossary": "Glossary",
 }
 
@@ -140,7 +140,7 @@ def build_merged_summary(triplets: Dict[str, Tuple[Path, Path]]) -> str:
     lines.append("* [Manifesto of International Data Spaces](external/manifesto/manifesto.md)")
 
     # Knowledge with 3 subsections
-    lines.append("* Knowledge")
+    lines.append("* IDSA Documents")
     for key in ORDER:
         title = TITLE_MAP[key]
         lines.append(f"    * {title}")

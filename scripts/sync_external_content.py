@@ -7,12 +7,12 @@ Requirements:
 - Called from repo root.
 - External sources are checked out by CI into:
   _sources/rulebook/ (folder to copy: documentation/)
-  _sources/ram5/     (folder to copy: docs/)
+  _sources/ram/     (folder to copy: docs/)
   _sources/glossary/ (folder to copy: docs/)
   _sources/manifesto/ (folder to copy: /)
 - Generates:
   docs/external/rulebook/
-  docs/external/ram5/
+  docs/external/ram/
   docs/external/glossary/
   docs/external/manifesto/
   docs/SUMMARY.md  (via build_summary.py)
@@ -31,10 +31,10 @@ SOURCES = {
         "summary_rel": "SUMMARY.md",
         "dst": EXTERNAL_DIR / "rulebook",
     },
-    "ram5": {
-        "src_root": REPO_ROOT / "_sources" / "ram5" / "docs",
+    "ram": {
+        "src_root": REPO_ROOT / "_sources" / "ram" / "docs",
         "summary_rel": "SUMMARY.md",
-        "dst": EXTERNAL_DIR / "ram5",
+        "dst": EXTERNAL_DIR / "ram",
     },
     "glossary": {
         "src_root": REPO_ROOT / "_sources" / "glossary" / "docs",

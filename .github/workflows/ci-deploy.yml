@@ -82,13 +82,13 @@ jobs:
           path: _sources/rulebook
           token: ${{ secrets.SOURCE_REPOS_PAT }}
 
-      - name: Checkout RAM5
+      - name: Checkout IDS-RAM
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
         uses: actions/checkout@v4
         with:
-          repository: International-Data-Spaces-Association/RAM5
+          repository: International-Data-Spaces-Association/IDS-RAM
           ref: main
-          path: _sources/ram5
+          path: _sources/ram
           token: ${{ secrets.SOURCE_REPOS_PAT }}
 
       - name: Checkout Glossary
@@ -181,7 +181,7 @@ jobs:
             --docs-dir docs \
             --summary docs/SUMMARY.md \
             --out exports/knowledge-base.md \
-            --title "Knowledge Base" \
+            --title "IDSA Knowledge Base" \
             --version "${{ steps.exportver.outputs.version }}"
       
       - name: Stage export media and rewrite image links
@@ -196,18 +196,26 @@ jobs:
         run: |
           cat > exports/cover.md <<'EOF'
           ---
-          title: "Knowledge Base"
+          title: "IDSA Knowledge Base"
           subtitle: "Export"
           author: "International Data Spaces Association"
           date: ""
+          license: "CC BY 4.0"
+          citation: |
+            IDSA Knowledge Base, version ${{ steps.exportver.outputs.version }}, International Data Spaces Association (IDSA)
           ---
           
-          # Knowledge Base
-          
+          # IDSA Knowledge Base
+          ---
           **Version:** ${{ steps.exportver.outputs.version }}
           
           **Generated:** $(date -u +'%Y-%m-%d')
-          
+          --- 
+          ## License
+          {{ license }}
+          ## How to Cite
+          {{ citation }}
+          ---
           \newpage
           EOF
 

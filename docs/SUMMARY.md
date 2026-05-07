@@ -6,7 +6,7 @@
 
 * [What is a data space?](dataspace.md)
 
-## Knowledge
+## IDSA Documents
 
 * *(generated during CI — see scripts/build_summary.py)*
 

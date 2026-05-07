@@ -18,8 +18,8 @@ This guide walks through the setup required to operate the `knowledge-base` site
   - Name: `SOURCE_REPOS_PAT`
   - Value: a **read‑only** Personal Access Token with `repo` (read) scope that can access:
     - `International-Data-Spaces-Association/IDSA-Rulebook`
-    - `International-Data-Spaces-Association/RAM5`
-    - `International-Data-Spaces-Association/members-area`
+    - `International-Data-Spaces-Association/IDS-RAM`
+    - `International-Data-Spaces-Association/glossary`
 
 > Least privilege: this PAT is used **only** for checking out the source repositories.
 
@@ -41,7 +41,7 @@ docker compose up
 
 
 - To also sync external sources locally, clone them beside this repo as:
-  - ../IDSA-Rulebook/, ../RAM5/, ../members-area/
+  - ../IDSA-Rulebook/, ../IDS-RAM/, ../members-area/
 - Then run:
 
 # optional local sync (uses adjacent clones)
@@ -53,12 +53,12 @@ mkdocs serve -a 0.0.0.0:8000
 - During CI, we read:
 
    - documentation/SUMMARY.md (Rulebook)
-   - docs/summary.md (RAM5)
-   - OrganizationalHandbook/summary.md (Handbook)
+   - docs/summary.md (IDS-RAM)
+   - glossary/summary.md (glossary)
 
 
 - We concatenate them (in that order) with H2 headings and rewrite links so they point to:
-   -   external/rulebook/..., external/ram5/..., external/handbook/...
+   -   external/rulebook/..., external/ram/..., external/glossary/...
 
 - The merged docs/SUMMARY.md drives the left navigation (via mkdocs-literate-nav).
 

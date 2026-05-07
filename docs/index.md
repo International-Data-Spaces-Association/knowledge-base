@@ -19,7 +19,7 @@ This release RC-2026-1 includes:
 * **Glossary of Commonly Agreed Terms:** Explore a glossary featuring standardized definitions and explanations of essential terms used across international data spaces, ensuring clarity and shared understanding for all stakeholders.
 * **Standards and technical specifications:** Standards and technical specifications serve as foundation for trusted, and interoperable data spaces. We list the relevant documents based on the IDSA groundwork.
 
-In the **downloads** section you can find the IDSA knowledge base as downloadable file for offline usage.
+In the **downloads** section you can find the IDSA Knowledge Base as downloadable file for offline usage.
 
 To **get started**, we recommend reading our introduction to [What is a data space](dataspace.md).
 
@@ -27,12 +27,12 @@ To **get started**, we recommend reading our introduction to [What is a data spa
 
 The IDSA documents follow a quarterly release approach based on the approval of the IDSA Working Groups. The versioning follows the scheme 'year-sequence - YYYY-N', e.g., 2026-1 for the first release in 2026. The knowledge base publishes the **latest release**. Older releases can be found on in the IDSA GitHub repository [knowledge base](https://github.com/International-Data-Spaces-Association/knowledge-base).
 
-The IDSA Knowledge base may be updated with errata versions including non-normative changes and may publish release candidates.
+The IDSA Knowledge Base may be updated with errata versions including non-normative changes and may publish release candidates.
 
 ## How to read this knowledge base
 
-> **Tabs:** Use the header tabs to switch between **Home / What is a data space? / Manifesto of International Data Spaces / Knowledge / Standards and specifications / Downloads / About**.
-> The outcome of the IDSA Working Groups is in the Knowledge Tab.
+> **Tabs:** Use the header tabs to switch between **Home / What is a data space? / Manifesto of International Data Spaces / IDSA Documents / Standards and specifications / Downloads / About**.
+> The outcome of the IDSA Working Groups is in the IDSA Documents and the Manifesto of International Data Spaces.
 
 ## Contributing
 
