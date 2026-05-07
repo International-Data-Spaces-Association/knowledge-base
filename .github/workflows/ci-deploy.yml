@@ -205,13 +205,6 @@ jobs:
             IDSA Knowledge Base, version ${{ steps.exportver.outputs.version }}, International Data Spaces Association (IDSA)
           ---
           
-          # IDSA Knowledge Base
-          ---
-          
-          **License: CC BY 4.0**
-          
-          **How to Cite: IDSA Knowledge Base, International Data Spaces Association (IDSA), 2026**
-          
           \newpage
           EOF
 
