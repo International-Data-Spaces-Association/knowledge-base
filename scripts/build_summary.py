@@ -8,8 +8,8 @@ Structure produced:
     * Rulebook
         * [Label](external/rulebook/...)
         * *.md
-    * RAM 5
-        * [Label](external/ram5/...)
+    * RAM
+        * [Label](external/ram/...)
     * Glossary
         * [Label](external/glossary/...)
 * [About](about.md)
@@ -27,10 +27,10 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = REPO_ROOT / "docs"
 OUT_FILE = DOCS_DIR / "SUMMARY.md"
 
-ORDER = ["rulebook", "ram5", "glossary"]
+ORDER = ["rulebook", "", "glossary"]
 TITLE_MAP = {
     "rulebook": "Rulebook",
-    "ram5": "RAM 5",
+    "ram": "RAM",
     "glossary": "Glossary",
 }
 
