@@ -4,7 +4,7 @@ A standards-aware, CI-gated documentation site built with **MkDocs Material** an
 
 ## Why this repo?
 
-- **Single entry point** for Rulebook, RAM5, and the Organizational Handbook.
+- **Single entry point** for Rulebook, RAM, and the Organizational Handbook.
 - **Consistent navigation** using a merged `SUMMARY.md`.
 - **Searchable** (client-side search plugin).
 - **Reliable**: markdown lint + link checks + strict build gate deployments.
@@ -12,7 +12,7 @@ A standards-aware, CI-gated documentation site built with **MkDocs Material** an
 ## External sources (read-only during build)
 
 1. `International-Data-Spaces-Association/IDSA-Rulebook` → `documentation/` → copied to `docs/external/rulebook/`
-2. `International-Data-Spaces-Association/RAM5` → `docs/` → `docs/external/ram5/`
+2. `International-Data-Spaces-Association/IDS-RAM` → `docs/` → `docs/external/ram/`
 3. `International-Data-Spaces-Association/Glossary` → `glossary/` → `docs/external/glossary/`
 
 > Checked out with the PAT stored in `SOURCE_REPOS_PAT`. Files are **not** committed back.
@@ -21,7 +21,7 @@ A standards-aware, CI-gated documentation site built with **MkDocs Material** an
 
 - **CI** checks out the sources, runs `scripts/sync_external_content.py` which:
   - Copies each folder into `docs/external/...`
-  - Concatenates their *summary files* (Rulebook → RAM5 → Handbook)
+  - Concatenates their *summary files* (Rulebook → RAM → Handbook)
   - **Rewrites relative links** to the new locations
   - Writes the merged `docs/SUMMARY.md`
 - MkDocs uses `mkdocs-literate-nav` to turn `SUMMARY.md` into the left navigation.
