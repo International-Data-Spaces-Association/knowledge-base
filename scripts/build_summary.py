@@ -27,7 +27,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = REPO_ROOT / "docs"
 OUT_FILE = DOCS_DIR / "SUMMARY.md"
 
-ORDER = ["rulebook", "", "glossary"]
+ORDER = ["rulebook", "ram", "glossary"]
 TITLE_MAP = {
     "rulebook": "Rulebook",
     "ram": "RAM",
