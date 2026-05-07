@@ -181,7 +181,7 @@ jobs:
             --docs-dir docs \
             --summary docs/SUMMARY.md \
             --out exports/knowledge-base.md \
-            --title "Knowledge Base" \
+            --title "IDSA Knowledge Base" \
             --version "${{ steps.exportver.outputs.version }}"
       
       - name: Stage export media and rewrite image links
@@ -196,13 +196,13 @@ jobs:
         run: |
           cat > exports/cover.md <<'EOF'
           ---
-          title: "Knowledge Base"
+          title: "IDSA Knowledge Base"
           subtitle: "Export"
           author: "International Data Spaces Association"
           date: ""
           ---
           
-          # Knowledge Base
+          # IDSA Knowledge Base
           
           **Version:** ${{ steps.exportver.outputs.version }}
           

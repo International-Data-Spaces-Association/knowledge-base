@@ -73,7 +73,7 @@ def main() -> None:
     ap.add_argument("--docs-dir", default="docs")
     ap.add_argument("--summary", default="docs/SUMMARY.md")
     ap.add_argument("--out", default="exports/knowledge-base.md")
-    ap.add_argument("--title", default="Knowledge Base")
+    ap.add_argument("--title", default="IDSA Knowledge Base")
     ap.add_argument("--version", required=True)
     ap.add_argument("--append-unlisted", action="store_true",
                     help="Append markdown files not referenced in SUMMARY (scope=ALL).")

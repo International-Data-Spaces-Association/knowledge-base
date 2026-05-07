@@ -1,11 +1,11 @@
 # Downloads
 
-This page provides exports of the complete Knowledge Base in **PDF** and **DOCX** format.
+This page provides exports of the complete IDSA Knowledge Base in **PDF** and **DOCX** format.
 
 ## Latest exports
 
-- [Knowledge Base PDF (latest)](knowledge-base-latest.pdf)
-- [Knowledge Base DOCX (latest)](knowledge-base-latest.docx)
+- [IDSA Knowledge Base PDF (latest)](knowledge-base-latest.pdf)
+- [IDSA Knowledge Base DOCX (latest)](knowledge-base-latest.docx)
 
 ## Versioned exports
 

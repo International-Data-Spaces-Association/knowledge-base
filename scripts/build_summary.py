@@ -140,7 +140,7 @@ def build_merged_summary(triplets: Dict[str, Tuple[Path, Path]]) -> str:
     lines.append("* [Manifesto of International Data Spaces](external/manifesto/manifesto.md)")
 
     # Knowledge with 3 subsections
-    lines.append("* Knowledge")
+    lines.append("* IDSA Documents")
     for key in ORDER:
         title = TITLE_MAP[key]
         lines.append(f"    * {title}")
