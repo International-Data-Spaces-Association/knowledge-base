@@ -60,7 +60,7 @@ plugins:
         'ids-knowledgebase/idsa-rulebook/summary/999_summary_outlook.md': 'external/rulebook/999_Summary_Outlook.md'
         'ids-knowledgebase/idsa-rulebook/imprint-and-external-links/frontmatter.md': 'external/rulebook/FrontMatter.md'
         # ── RAM 5 ─────────────────────────────────────────────────────
-        'ids-knowledgebase/ids-ram-5-working-draft.md': 'external/ram/Introduction.md'
+        'ids-knowledgebase/ids-ram-5-working-draft.md': 'external/ram/Introduction/README.md'
         'ids-knowledgebase/ids-ram-5-working-draft/docs/introduction.md': 'external/ram/Introduction/README.md'
         'ids-knowledgebase/ids-ram-5-working-draft/docs/context.md': 'external/ram/Context/README.md'
         'ids-knowledgebase/ids-ram-5-working-draft/docs/principles.md': 'external/ram/Principles/README.md'
