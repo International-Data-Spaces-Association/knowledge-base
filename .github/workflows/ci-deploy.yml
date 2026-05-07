@@ -202,20 +202,9 @@ jobs:
           date: ""
           license: "CC BY 4.0"
           citation: |
-            IDSA Knowledge Base, version ${{ steps.exportver.outputs.version }}, International Data Spaces Association (IDSA)
+            IDSA Knowledge Base, International Data Spaces Association (IDSA), 2026
           ---
           
-          # IDSA Knowledge Base
-          ---
-          **Version:** ${{ steps.exportver.outputs.version }}
-          
-          **Generated:** $(date -u +'%Y-%m-%d')
-          --- 
-          ## License
-          {{ license }}
-          ## How to Cite
-          {{ citation }}
-          ---
           \newpage
           EOF
 

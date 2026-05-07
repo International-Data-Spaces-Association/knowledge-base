@@ -1,11 +1,13 @@
 
-site_name: Knowledge Base
-site_url: https://ssteinbuss.github.io/knowledge-base/
+site_name: IDSA Knowledge Base
+site_url: https://kb.internationaldataspaces.org
 theme:
   name: material
   favicon: assets/favicon.png
   logo: assets/IDSA-logo_2.png
   custom_dir: overrides
+  static_templates:
+    - 404.html
   features:
     - navigation.tabs
     - navigation.top
