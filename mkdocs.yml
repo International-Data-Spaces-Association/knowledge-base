@@ -14,7 +14,7 @@ theme:
   palette:
     primary: custom
     accent: custom
-static_teplates:
+static_templates:
   - 404.html
 extra_css:
   - assets/styles.css
