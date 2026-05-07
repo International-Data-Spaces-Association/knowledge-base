@@ -20,12 +20,14 @@ plugins:
   - search
   - git-revision-date-localized:
       enable_creation_date: true
+      exclude:
+        - external/**/*
   - literate-nav:
       nav_file: SUMMARY.md
   - redirects:
       redirect_maps:
         # ── Rulebook ──────────────────────────────────────────────────
-        'ids-knowledgebase/idsa-rulebook': 'external/rulebook/001_Introduction/'
+        'ids-knowledgebase/idsa-rulebook': 'external/rulebook/001_Introduction.md'
         'ids-knowledgebase/idsa-rulebook/fundamentals/002_guidingprinciples': 'external/rulebook/002_GuidingPrinciples/'
         'ids-knowledgebase/idsa-rulebook/fundamentals/003_whatisadataspace': 'external/rulebook/003_WhatIsADataspace/'
         'ids-knowledgebase/idsa-rulebook/fundamentals/004_layers': 'external/rulebook/004_Layers/'
