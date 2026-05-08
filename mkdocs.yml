@@ -28,6 +28,8 @@ plugins:
       nav_file: SUMMARY.md
   - redirects:
       redirect_maps:
+        # ── kb root ──────────────────────────────────────────────────
+        'ids-knowledgebase.md': 'index.md'
         # ── Rulebook ──────────────────────────────────────────────────
         'ids-knowledgebase/idsa-rulebook.md': 'external/rulebook/001_Introduction.md'
         'ids-knowledgebase/idsa-rulebook/fundamentals/002_guidingprinciples.md': 'external/rulebook/002_GuidingPrinciples.md'
