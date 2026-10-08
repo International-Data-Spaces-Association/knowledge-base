@@ -11,7 +11,6 @@
 * [ISO/IEC DIS 26450](https://www.iso.org/standard/93502.html)
 * [ISO/IEC DIS 26451](https://www.iso.org/standard/93503.html)
 
-
 ## IDSA publications on Data Space Standards
 
 More information on Data Space Standards and specifications can be found in the IDSA publications:
