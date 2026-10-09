@@ -14,10 +14,10 @@ This Knowledge Base integrates curated documentation into a single destination:
 
 **Provenance.** Content under **IDSA Documents** is assembled from:
 
-- `International-Data-Spaces-Association/Manifestor-of-International-Data-Spaces` (`/`)
+- `International-Data-Spaces-Association/Manifesto-of-International-Data-Spaces` (`/`)
 - `International-Data-Spaces-Association/IDSA-Rulebook` (`documentation/`)
 - `International-Data-Spaces-Association/IDS-RAM` (`docs/`)
-- `International-Data-Spaces-Association/glossary` (`Glossary/`)
+- `International-Data-Spaces-Association/Glossary` (`docs/`)
 
 All external content is **copied during CI only** and **never committed** back to this repository.
 

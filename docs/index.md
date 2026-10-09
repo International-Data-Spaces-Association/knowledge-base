@@ -2,22 +2,27 @@
 
 The IDSA Knowledge Base serves as a comprehensive documentation of information and resources developed by the IDSA Working Groups. This Knowledge Base brings together a collection of approved and published deliverables, offering valuable insights and guidance for the general public. While the Working Groups are continually refining and updating their materials, the Knowledge Base features only the approved versions that have undergone review and approval. As a result, the documents included may not always reflect the most current status of ongoing drafts, but they represent the authoritative and officially released content.
 
-## Version 2026-2
+## Version 2026-3
 
-This release RC-2026-2 includes:
+This release 2026-3 includes:
 
 * Manifesto of International Data Spaces
-* IDSA Rulebook 2026-2 release (see [release notes](https://github.com/International-Data-Spaces-Association/IDSA-Rulebook/releases/tag/2026-2))
-* IDS-RAM 2026-2 Release Candidate
+* IDSA Rulebook 2026-3 release (see [release notes](https://github.com/International-Data-Spaces-Association/IDSA-Rulebook/releases/tag/2026-3))
+* IDS Reference Architecture Model (IDS-RAM) 2026-3 release (see [release notes](https://github.com/International-Data-Spaces-Association/IDS-RAM/releases/tag/2026-3))
 * Glossary 2026-1 Release Candidate
+
+New in this release:
+
+* **IDSA Rulebook:** an annex on international perspectives on data spaces, starting with the European perspective
+* **IDS-RAM:** the architectural principles, a focus paper on value-adding services in decentralized data spaces and updated architectural patterns for the Data Space Governance Authority (DSGA) and catalogs
 
 ## What you will find in the IDSA Knowledge Base
 
 * **Manifesto of International Data Spaces:** Discover the foundational vision and guiding idea behind international data spaces, outlining their purpose, core values, and the future they aim to enable.
-* **Principles of Dataspaces from the IDSA Rulebook:** Access the key principles and functional requirements for trustworthy, and interoperable dataspaces enabeling trusted data sharing.
+* **Principles of data spaces from the IDSA Rulebook:** Access the key principles and functional requirements for trustworthy and interoperable data spaces enabling trusted data sharing.
 * **Practical Guidance from the Reference Architecture Model:** Find actionable recommendations and design patterns on how to design, build, and operate data spaces, based on IDSA Reference Architecture Model.
 * **Glossary of Commonly Agreed Terms:** Explore a glossary featuring standardized definitions and explanations of essential terms used across international data spaces, ensuring clarity and shared understanding for all stakeholders.
-* **Standards and technical specifications:** Standards and technical specifications serve as foundation for trusted, and interoperable data spaces. We list the relevant documents based on the IDSA groundwork.
+* **Standards and technical specifications:** Standards and technical specifications serve as foundation for trusted and interoperable data spaces. We list the relevant documents based on the IDSA groundwork, including the protocol specifications [Dataspace Protocol (DSP)](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/) and [Decentralized Claims Protocol (DCP)](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/). See [Standards and specifications](standards.md) for the full list.
 
 In the **downloads** section you can find the IDSA Knowledge Base as downloadable file for offline usage.
 
@@ -25,7 +30,7 @@ To **get started**, we recommend reading our introduction to [What is a data spa
 
 ## Versioning
 
-The IDSA documents follow a quarterly release approach based on the approval of the IDSA Working Groups. The versioning follows the scheme 'year-sequence - YYYY-N', e.g., 2026-1 for the first release in 2026. The knowledge base publishes the **latest release**. Older releases can be found on in the IDSA GitHub repository [knowledge base](https://github.com/International-Data-Spaces-Association/knowledge-base).
+The IDSA documents follow a quarterly release approach based on the approval of the IDSA Working Groups. The versioning follows the scheme 'year-sequence - YYYY-N', e.g., 2026-1 for the first release in 2026. The knowledge base publishes the **latest release**. Older releases can be found in the IDSA GitHub repository [knowledge base](https://github.com/International-Data-Spaces-Association/knowledge-base).
 
 The IDSA Knowledge Base may be updated with errata versions including non-normative changes and may publish release candidates.
 
@@ -36,4 +41,4 @@ The IDSA Knowledge Base may be updated with errata versions including non-normat
 
 ## Contributing
 
-Contributions to the IDSA Working Groups and their deliverables is limited to IDSA members. ([Learn here how to become a member](https://internationaldataspaces.org/we/become-a-member/)) However, we encourage all data space experts to [join IDSA as member](https://internationaldataspaces.org/we/become-a-member/) or in our [user group](https://internationaldataspaces.org/data-space-user-group/). Feel free to propose change requests or feature requests as [GitHub issues] or via the [IDSA user group portal](https://community.internationaldataspaces.org).
+Contributions to the IDSA Working Groups and their deliverables are limited to IDSA members. ([Learn here how to become a member](https://internationaldataspaces.org/we/become-a-member/)) However, we encourage all data space experts to [join IDSA as member](https://internationaldataspaces.org/we/become-a-member/) or in our [user group](https://internationaldataspaces.org/data-space-user-group/). Feel free to propose change requests or feature requests as [GitHub issues](https://github.com/International-Data-Spaces-Association/knowledge-base/issues) or via the [IDSA user group portal](https://community.internationaldataspaces.org).
