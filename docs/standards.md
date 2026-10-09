@@ -2,15 +2,17 @@
 
 ## Specifications
 
-* [Dataspace Protocol 2025-1](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/2025-1-err1/)
-* [Decentralized Claims Protocol v1.0](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/v1.0.1/)
+* [Dataspace Protocol](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/) open specification
+* [Decentralized Claims Protocol](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/) open specification
 
 ## Standards
 
-* [ISO/IEC DIS 20151](https://www.iso.org/standard/86589.html)
+* [ISO/IEC DIS 20151-1](https://www.iso.org/standard/86589.html) Dataspace Concepts and Characteristics
+* [ISO/IEC DIS 26450](https://www.iso.org/standard/93502.html) Dataspace Protocol
+* [ISO/IEC DIS 26451](https://www.iso.org/standard/93503.html) Decentralized Claims Protocol
 
 ## IDSA publications on Data Space Standards
 
-More information on Data Space Standards and specifcations can be found in the IDSA publications:
+More information on Data Space Standards and specifications can be found in the IDSA publications:
 
-* [Data Spaces Standardization Landscape IDSA Position Paper | Version 1.0 | July 2025](https://internationaldataspaces.org/download/51948/?tmstv=1776866573)
+* [Data Spaces Standardization Landscape IDSA Position Paper | Version 2.0 | May 2026](https://internationaldataspaces.org/download/54823/?tmstv=1790819955)
