@@ -14,8 +14,8 @@ architectural guidance for data spaces.
 
 ![Overview of data spaces](assets/dataspace_overview.png)
 
-The ISO/IEC 20151 Standard "Information technology - Cloud computing
-and distributed platforms - Dataspace concepts and characteristics"
+The ISO/IEC FDIS 20151-1 "Cloud computing and distributed platforms -
+Dataspaces - Part 1: Concepts and characteristics"
 defines data spaces as
 
 **environment enabling trusted data sharing between participating parties, based on an agreed governance framework, along with an agreed set of policies, semantic models, standardised protocols, processes, and facilitating services.**
@@ -59,11 +59,11 @@ in the Rulebook for more details.
 
 **Each participant is represented by a software agent (Data space connector) which acts on behalf of this organization in the data space.**
 
-The **Dataspace Connector** offers API endpoints for data and service
+The **data space connector** offers API endpoints for data and service
 discovery, data sharing contract negotiation, data sharing orchestration
 and management of claims about the organization.
 
-**IDS-RAM** describes these capabilities which can be realized using specifications such as the **Dataspace protocol** to ensure interoperable communications.
+**IDS-RAM** describes these capabilities which can be realized using specifications such as the **Dataspace Protocol** to ensure interoperable communications.
 
 ![Data Space Connectors and the Dataspace Protocol](assets/image3.png)
 
@@ -78,7 +78,7 @@ gives participants full technical control over presenting and verifying
 identity claims.
 
 **Decentralized Claims Protocol**, DCP (ISO/IEC DIS 26451) provides an
-overlay to the Dataspace protocol for organizational identity and
+overlay to the Dataspace Protocol for organizational identity and
 trust/credential verification while preserving privacy. ([Decentralized Claims Protocol specification on GitHub](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/) and [Decentralized Claims Protocol specification](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/v1.0.1/))
 
 ![Decentralized Identifiers and Claims](assets/DS_claims.png)

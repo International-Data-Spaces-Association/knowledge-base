@@ -10,9 +10,9 @@
 
 * *(generated during CI — see scripts/build_summary.py)*
 
-## Standards and external sources
+## Standards and specifications
 
-* [Standards and external sources](standards.md)
+* [Standards and specifications](standards.md)
 
 ## About
 

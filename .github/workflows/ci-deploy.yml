@@ -19,7 +19,7 @@ concurrency:
 jobs:
   lint:
     name: Markdown Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
 
   linkcheck:
     name: Broken Link Check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -63,7 +63,7 @@ jobs:
 
   build:
     name: Build Docs (with external sources) + Exports
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [lint, linkcheck]
     steps:
       - name: Checkout repo
@@ -302,7 +302,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build
     if: ${{ github.ref == 'refs/heads/main' }}
     environment:

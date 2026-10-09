@@ -17,7 +17,7 @@ theme:
     primary: custom
     accent: custom
 extra_css:
-  - assets/styles.css
+  - assets/style.css
 plugins:
   - search
   - git-revision-date-localized:
@@ -31,6 +31,7 @@ plugins:
         # ── kb root ──────────────────────────────────────────────────
         'ids-knowledgebase.md': 'index.md'
         # ── Rulebook ──────────────────────────────────────────────────
+        'external/rulebook/index.md': 'external/rulebook/001_Introduction.md'
         'ids-knowledgebase/idsa-rulebook.md': 'external/rulebook/001_Introduction.md'
         'ids-knowledgebase/idsa-rulebook/fundamentals/002_guidingprinciples.md': 'external/rulebook/002_GuidingPrinciples.md'
         'ids-knowledgebase/idsa-rulebook/fundamentals/003_whatisadataspace.md': 'external/rulebook/003_WhatIsADataspace.md'
@@ -307,6 +308,7 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+      title: On this page
   - tables
   - footnotes
   - def_list
