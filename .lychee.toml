@@ -1,13 +1,18 @@
 # Lychee link checker configuration
 exclude = [
   "mailto:security@your-org.example",
-  "mailto:privacy@your-org.example"
+  "mailto:privacy@your-org.example",
+  # iso.org answers 403 to GitHub-hosted runners (bot protection); links work from a browser
+  '^https://www\.iso\.org/standard/',
+  # eur-lex.europa.eu answers 202 (bot challenge) and oecd.org answers 403 to automated requests
+  '^https://eur-lex\.europa\.eu/',
+  '^https://(www\.)?oecd\.org/'
 ]
 # Retry for flaky endpoints
 retry_wait_time = 2
 max_retries = 3
 # Cache to reduce rate limits across runs
+# lychee always writes the cache to .lycheecache in the working directory
 cache = true
-cache_path = ".lycheecache"
 # Accept common redirect codes
 accept = [200, 206, 301, 302, 429]
