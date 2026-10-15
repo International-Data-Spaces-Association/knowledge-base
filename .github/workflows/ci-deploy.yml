@@ -57,6 +57,8 @@ jobs:
             --config .lychee.toml
             --no-progress
             --accept 200,206,301,302,429
+            --exclude docs/external/
+            --exclude docs/downloads/knowledge-base-
             docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -66,8 +68,9 @@ jobs:
     runs-on: ubuntu-24.04
     needs: [lint, linkcheck]
     env:
-      # mkdocs is pinned to 1.x in requirements.txt; silence the Material for MkDocs 2.0 notice
-      NO_MKDOCS_2_WARNING: "true"
+      # mkdocs is pinned to 1.x in requirements.txt; silence the MkDocs 2.0 notices
+      NO_MKDOCS_2_WARNING: "true"       # Material for MkDocs
+      DISABLE_MKDOCS_2_WARNING: "true"  # ProperDocs (via mkdocs-literate-nav, mkdocs-redirects)
     steps:
       - name: Checkout repo
         uses: actions/checkout@v7
@@ -139,7 +142,23 @@ jobs:
         run: |
             mkdir -p docs/external/manifesto
             cp _sources/manifesto/README.md docs/external/manifesto/manifesto.md
-          
+
+      # Report only: broken links in IDSA documents are fixed by the respective Working Group
+      # and must not block a Knowledge Base release. See the job summary for findings.
+      - name: Link check IDSA documents (report only)
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: false
+          failIfEmpty: false
+          args: >-
+            --config .lychee.toml
+            --no-progress
+            --accept 200,206,301,302,429
+            docs/external
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Debug — list export directory
         if: always()
         shell: bash
