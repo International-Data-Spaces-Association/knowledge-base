@@ -22,13 +22,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v15
+        uses: DavidAnson/markdownlint-cli2-action@v24
         with:
           globs: |
             **/*.md
@@ -39,19 +39,19 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Cache lychee
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .lycheecache
           key: lychee-${{ runner.os }}-${{ hashFiles('.lychee.toml') }}
 
       - name: Run lychee
-        uses: lycheeverse/lychee-action@v1
+        uses: lycheeverse/lychee-action@v2
         with:
           args: >-
             --config .lychee.toml
@@ -65,9 +65,12 @@ jobs:
     name: Build Docs (with external sources) + Exports
     runs-on: ubuntu-24.04
     needs: [lint, linkcheck]
+    env:
+      # mkdocs is pinned to 1.x in requirements.txt; silence the Material for MkDocs 2.0 notice
+      NO_MKDOCS_2_WARNING: "true"
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -75,7 +78,7 @@ jobs:
       # --- External sources checkout (read-only; skipped on forked PRs) ---
       - name: Checkout Rulebook
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: International-Data-Spaces-Association/IDSA-Rulebook
           ref: main
@@ -84,7 +87,7 @@ jobs:
 
       - name: Checkout IDS-RAM
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: International-Data-Spaces-Association/IDS-RAM
           ref: main
@@ -93,7 +96,7 @@ jobs:
 
       - name: Checkout Glossary
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: International-Data-Spaces-Association/Glossary
           ref: main
@@ -102,7 +105,7 @@ jobs:
 
       - name: Checkout Manifesto
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: International-Data-Spaces-Association/Manifesto-of-International-Data-Spaces
           ref: main
@@ -110,7 +113,7 @@ jobs:
           token: ${{ secrets.SOURCE_REPOS_PAT }}
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
@@ -256,7 +259,7 @@ jobs:
           cp "exports/knowledge-base-${{ steps.exportver.outputs.version }}.docx" "docs/downloads/knowledge-base-${{ steps.exportver.outputs.version }}.docx"
 
       - name: Upload versioned export artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: knowledge-base-exports-${{ steps.exportver.outputs.version }}
           path: |
@@ -296,7 +299,7 @@ jobs:
         run: python -m mkdocs build --strict
 
       - name: Upload artifact to Pages
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
@@ -310,8 +313,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
