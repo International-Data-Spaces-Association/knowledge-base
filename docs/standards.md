@@ -11,10 +11,10 @@ Open specifications published by the Eclipse Dataspace Working Group. The links 
 
 International standards under development in ISO/IEC JTC 1. The prefix shows the current stage: approved work item (AWI), draft international standard (DIS) or final draft international standard (FDIS).
 
-* [ISO/IEC FDIS 20151-1](https://www.iso.org/standard/86589.html) Cloud computing and distributed platforms - Dataspaces - Part 1: Concepts and characteristics
+* [ISO/IEC IS 20151-1](https://www.iso.org/standard/86589.html) Cloud computing and distributed platforms - Dataspaces - Part 1: Concepts and characteristics
 * [ISO/IEC AWI 20151-2](https://www.iso.org/standard/92809.html) Cloud computing and distributed platforms - Dataspaces - Part 2: Trust frameworks
-* [ISO/IEC DIS 26450](https://www.iso.org/standard/93502.html) Information technology - Eclipse Dataspace Protocol (DSP)
-* [ISO/IEC DIS 26451](https://www.iso.org/standard/93503.html) Information technology - Eclipse decentralized claims protocol
+* [ISO/IEC FDIS 26450](https://www.iso.org/standard/93502.html) Information technology - Eclipse Dataspace Protocol (DSP)
+* [ISO/IEC IS 26451](https://www.iso.org/standard/93503.html) Information technology - Eclipse decentralized claims protocol
 
 ## IDSA publications on data space standards
 
