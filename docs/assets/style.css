@@ -21,8 +21,12 @@
 
 .md-footer,
 .md-footer .md-footer-meta {
-  font-size: 0.85rem;   /* try 0.80–0.90 based on taste */
+  font-size: 0.75rem;   /* try 0.70–0.80 based on taste */
   line-height: 1.35;
+}
+.md-footer-meta .md-footer__inner {
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
 }
 
 :root  > * {
